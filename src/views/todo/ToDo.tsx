@@ -1,12 +1,30 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import TodoInput from "@/components/todo/TodoInput";
 import Task, { TaskType } from "@/components/todo/Task";
-import omit from 'lodash/omit';
 
 const ToDo = () => {
     const [id, setId] = useState(0);
-    // napravi da koristis useReducer umisto useState
-    const [tasks, setTasks] = useState<TaskType[]>([]);
+
+    type TaskReducerActionType = 
+     | { type: 'addTask', task: TaskType }
+     | { type: 'toggleTask' | 'deleteTask', id: number }
+     | { type: 'setAll', done: boolean };
+
+    const tasksReducer = (state: readonly TaskType[], action: TaskReducerActionType): TaskType[] => {
+        switch (action.type) {
+            case 'addTask':
+                return [...state, action.task];
+            case 'deleteTask':
+                return state.filter(({ id: taskId }) => taskId !== action.id);
+            case 'toggleTask':
+                return state.map((task) => (task.id === action.id ? { ...task, done: !task.done } : task));
+            case 'setAll':
+                return state.map((task) => ({ ...task, done: action.done }));
+            default:
+                throw new Error();
+        }
+    };
+    const [tasks, dispatch] = useReducer(tasksReducer, []);
     const [allChecked, setAllChecked] = useState(false);
 
     const getId = (): number => {
@@ -14,18 +32,18 @@ const ToDo = () => {
         return id - 1;
     }
 
-    const createNewTask = (text: string) => setTasks((currentTasks: TaskType[]) => [...currentTasks, { id: getId(), text, done: true }]);
-
+    const createNewTask = (text: string) => dispatch({ type: 'addTask', task: { id: getId(), text, done: false } });
     const addNewTask = (text: string) => createNewTask(text);
-    const toggleTask = (id: number) => setTasks((currentTasks: TaskType[]) => currentTasks.map((task: TaskType) => (task.id === id ? { done: !task.done, ...omit(task, ['done']) } : task)));
-    const removeTask = (id: number) => setTasks((currentTasks: TaskType[]) => currentTasks.filter(({ id: taskId }) => taskId !== id));
+    const toggleTask = (id: number) => dispatch({ type: 'toggleTask', id });
+    const removeTask = (id: number) => dispatch({ type: 'deleteTask', id });
 
     const toggleAllChecked = () => setAllChecked((currentAllChecked: boolean) => {
         const newAllChecked = !currentAllChecked;
         setDoneOnAllTasks(newAllChecked);
         return newAllChecked;
     });
-    const setDoneOnAllTasks = (done: boolean) => setTasks((currentTasks) => currentTasks.map(({ done: taskDone, ...task }) => ({ done, ...task })));
+
+    const setDoneOnAllTasks = (done: boolean) => dispatch({ type: 'setAll', done });
     const allCheckText = (allChecked ? 'Uncheck all tasks' : 'Check all tasks');
 
     const tasksCommponents = (!tasks.length ? <span className="text-sm text-gray-400">No tasks</span> : tasks.map((task) => {
