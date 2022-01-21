@@ -4,7 +4,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 const CommonHeader = () => {
     return (
-        <div>
+        <div className="h-screen">
             <header className="p-3 border-b border-gray-400">
                 <Link to="/">
                     <FontAwesomeIcon
