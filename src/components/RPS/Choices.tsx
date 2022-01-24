@@ -1,5 +1,6 @@
 import ChoiceRPS from '@/components/RPS/Choice';
 import bgTriangle from '@/assets/images/bg-triangle.svg'
+import { BaseProps } from '@/helpers/types';
 
 export enum UserChoice {
     Paper = 'paper',
@@ -7,9 +8,11 @@ export enum UserChoice {
     Rock = 'rock',
 };
 
-const Choices = ({ onUserChoice }: { onUserChoice: Function }) => {
+const Choices = ({ onUserChoice, className }: { onUserChoice: Function } & BaseProps) => {
+    const choicesClass = `relative w-full max-w-[305px] ${className}`;
+
     return (
-        <div className="relative w-full max-w-[305px]">
+        <div className={choicesClass}>
             <img
                 src={bgTriangle}
                 alt="trinagle"

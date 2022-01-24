@@ -13,13 +13,28 @@ const CHOICE = {
 type ChoiceProps = {
     variant: 'paper' | 'scissors' | 'rock',
     onClick?: MouseEventHandler,
+    scale?: boolean,
 };
 
-const ChoiceRPS = ({ variant, onClick, className }: ChoiceProps & BaseProps) => {
+const ChoiceRPS = ({ variant, onClick, className, scale }: ChoiceProps & BaseProps) => {
     const { src, gradientColorBright, gradientColorDark, darkerBackground } = CHOICE[variant];
 
-    const colorOutlineClass = `flex items-center justify-center z-10 h-36 w-36 bg-gradient-to-t ${gradientColorDark} ${gradientColorBright} rounded-full`;
-    const shadowOutlineClass = `absolute top-1.5 flex h-36 w-36 rounded-full ${darkerBackground} brightness-75`;
+    const performScaling = scale || false;
+
+    const colorOutlineScaling = performScaling ? 'md:w-[13.5rem] md:h-[13.5rem] lg:h-[22.5rem] lg:w-[22.5rem]' : '';
+    const colorOutlineClass = `flex items-center justify-center z-10 h-36 w-36 ${colorOutlineScaling} bg-gradient-to-t ${gradientColorDark} ${gradientColorBright} rounded-full`;
+
+    const shadowOutlineScaling = performScaling ? 'md:top-[9px] lg:top-[1.125rem] md:w-[13.5rem] md:h-[13.5rem] lg:h-[22.5rem] lg:w-[22.5rem]' : '';
+    const shadowOutlineClass = `absolute top-1.5 flex h-36 w-36 ${shadowOutlineScaling} rounded-full ${darkerBackground} brightness-75`;
+
+    const backgroundShadowScaling = performScaling ? 'md:h-[10.5rem] md:w-[10.5rem] lg:h-[17.5rem] lg:w-[17.5rem]' : '';
+    const backgroundShadowClass = `relative flex items-center justify-center h-28 w-28 ${backgroundShadowScaling} rounded-full bg-gray-300 overflow-hidden`;
+
+    const backgroundScaling = performScaling ? 'md:top-[9px] lg:top-[1.125rem] md:h-[10.5rem] md:w-[10.5rem] lg:h-[17.5rem] lg:w-[17.5rem]' : '';
+    const backgroundClass = `absolute top-1.5 h-28 w-28 ${backgroundScaling} rounded-full bg-white`;
+
+    const imageScaling = performScaling ? 'md:w-[4rem] lg:w-[6.25rem]' : '';
+    const imageClass = `z-10 ${imageScaling}`;
 
     return (
         <button
@@ -28,13 +43,13 @@ const ChoiceRPS = ({ variant, onClick, className }: ChoiceProps & BaseProps) => 
         >
             <div className="relative flex items-center justify-center">
                 <div className={colorOutlineClass}>
-                    <div className="relative flex items-center justify-center h-28 w-28 rounded-full bg-gray-300 overflow-hidden">
-                        <div className="absolute top-1.5 h-28 w-28 rounded-full bg-white">
+                    <div className={backgroundShadowClass}>
+                        <div className={backgroundClass}>
                         </div>
                         <img
                             src={src}
                             alt="paper"
-                            className="z-10"
+                            className={imageClass}
                         />
                     </div>
                 </div>

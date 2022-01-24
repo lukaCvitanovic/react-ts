@@ -18,7 +18,7 @@ type GameStatsType = {
 const RockPaperScissors = () => {
     const [open, setOpen] = useState(false);
     const [showResults, setShowResults] = useState(false);
-    const [gameStats, setGameStats] = useState<GameStatsType>({ win: false, userChoice: UserChoice.Rock, computerChoice: UserChoice.Scissors, score: 0 });
+    const [gameStats, setGameStats] = useState<GameStatsType>({ win: false, userChoice: UserChoice.Rock, computerChoice: UserChoice.Scissors, score: 12 });
 
     const openRulesModal = () => setOpen(true);
     const closeRulesModal = () => setOpen(false);
@@ -46,7 +46,7 @@ const RockPaperScissors = () => {
     };
 
     return (
-        <div className="flex flex-col justify-between items-center p-8 h-full bg-gradient-radial">
+        <div className="flex flex-col justify-between items-center p-8 h-full bg-gradient-radial overflow-hidden">
             <Score score={gameStats.score} />
             {showResults
                 ?   <Results
@@ -56,15 +56,18 @@ const RockPaperScissors = () => {
                         onPlayAgain={handlePlayAgain}
                     />
                 :   <Choices
+                        className="md:scale-125 md:mt-10"
                         onUserChoice={didUserWin}
                     />
             }
-            <ButtonRPS
-                className="mb-8"
-                onClick={openRulesModal}
-            >
-                <span>Rules</span>
-            </ButtonRPS>
+            <div className="w-full flex justify-center md:justify-end">
+                <ButtonRPS
+                    className="mb-8"
+                    onClick={openRulesModal}
+                >
+                    <span>Rules</span>
+                </ButtonRPS>
+            </div>
             {open &&
                 <ModalPortal>
                     <Modal>
