@@ -2,14 +2,14 @@ import ChoiceRPS from '@/components/RPS/Choice';
 import bgTriangle from '@/assets/images/bg-triangle.svg'
 
 export enum UserChoice {
-    Paper = 'PAPER',
-    Scissors = 'SCISSORS',
-    Rock = 'ROCK',
+    Paper = 'paper',
+    Scissors = 'scissors',
+    Rock = 'rock',
 };
 
 const Choices = ({ onUserChoice }: { onUserChoice: Function }) => {
     return (
-        <div className="relative w-full">
+        <div className="relative w-full max-w-[305px]">
             <img
                 src={bgTriangle}
                 alt="trinagle"
