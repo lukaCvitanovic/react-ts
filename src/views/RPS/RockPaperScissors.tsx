@@ -20,6 +20,8 @@ const RockPaperScissors = () => {
     const [showResults, setShowResults] = useState(false);
     const [gameStats, setGameStats] = useState<GameStatsType>({ win: false, userChoice: UserChoice.Rock, computerChoice: UserChoice.Scissors, score: 12 });
 
+    const [modalBgTransition, setModalBgTransition] = useState(false);
+
     const openRulesModal = () => setOpen(true);
     const closeRulesModal = () => setOpen(false);
 
@@ -38,6 +40,8 @@ const RockPaperScissors = () => {
     }
 
     const handlePlayAgain = () => setShowResults(false);
+
+    const setModalTransition = (flag: boolean) => setModalBgTransition(flag);
 
     const userWinningCondition = {
         [UserChoice.Paper]: UserChoice.Rock,
@@ -70,9 +74,12 @@ const RockPaperScissors = () => {
             </div>
             {open &&
                 <ModalPortal>
-                    <Modal>
+                    <Modal
+                        transitionFlag={modalBgTransition}
+                    >
                         <Rules
                             onClose={closeRulesModal}
+                            omitModalTransition={setModalTransition}
                         />
                     </Modal>
                 </ModalPortal>
