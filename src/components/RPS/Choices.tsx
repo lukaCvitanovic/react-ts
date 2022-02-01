@@ -69,7 +69,6 @@ const Choices = ({ onSetGameStats, className }: ChoicesProps & BaseProps) => {
     const { state: { choiceRect, resultRect, computerResultRect , choiceTransitionFlag }, dispatch } = useContext(ResultTransitionContext);
 
     const handleUserChoice = (e: MouseEvent, userChoice: UserChoice) => {
-        console.log('click');
         setUserChoice(userChoice);
         if (e.currentTarget && e.currentTarget instanceof Element) dispatch({ type: 'setChoiceRect', payload: e.currentTarget.getBoundingClientRect() });
         else throw new Error('Mouse event is not insance of Element');
@@ -82,8 +81,8 @@ const Choices = ({ onSetGameStats, className }: ChoicesProps & BaseProps) => {
     useEffect(() => {
         const nonEmptyRects = !isEqual(choiceRect, new DOMRect()) && !isEqual(resultRect, new DOMRect()) && !isEmpty(choicesRects);
         if (nonEmptyRects) {
-            setComputerAnimationOffsets(calculateTransitionAnimation(choicesRects[storedComputerChoice], computerResultRect));
             setUserAnimationOffsets(calculateTransitionAnimation(choiceRect, resultRect));
+            setComputerAnimationOffsets(calculateTransitionAnimation(choicesRects[storedComputerChoice], computerResultRect));
             setUserScaling(calculateScalingDiff(choiceRect, resultRect));
             setComputerScaling(calculateScalingDiff(choicesRects[storedComputerChoice], computerResultRect));
         }
@@ -119,7 +118,6 @@ const Choices = ({ onSetGameStats, className }: ChoicesProps & BaseProps) => {
         };
         choicesTransitions[choice] = {
             unmounted: {},
-            // try to determine how to programaticly calculate variable that has value of - 7/
             entering: { transform: `translate(${offsets.x + offsetCorrection()}px, ${offsets.y + offsetCorrection()}px) scale(${scaling})`, opacity: 1 },
             entered: { transform: `translate(${offsets.x + offsetCorrection()}px, ${offsets.y + offsetCorrection()}px) scale(${scaling})`, opacity: 1 },
             exiting: { transform: `translate(0,0) scale(0.9)`, opacity: 1 },
@@ -140,7 +138,7 @@ const Choices = ({ onSetGameStats, className }: ChoicesProps & BaseProps) => {
         dispatch({ type: 'setShowChoices', payload: false });
     }
 
-    const durationMS = 200;
+    const durationMS = 500;
     const defaultStyle = { transition: `transform ${durationMS}ms ease-in-out` };
     const defaultOpacityStyle = { transition: `opacity ${durationMS}ms ease-in-out` };
     const calculateDefaultStyle = (choice: UserChoice) => (choice === calculateUnchosen(storedUserChoice, storedComputerChoice) ? defaultOpacityStyle : defaultStyle);
@@ -195,7 +193,6 @@ const Choices = ({ onSetGameStats, className }: ChoicesProps & BaseProps) => {
                     <Transition
                         in={localChoiceTransitionFlag}
                         timeout={durationMS}
-                        // onEntered={onAnimationEnd}
                     >
                         {(state) => {
                             return (
@@ -217,7 +214,6 @@ const Choices = ({ onSetGameStats, className }: ChoicesProps & BaseProps) => {
                     <Transition
                         in={localChoiceTransitionFlag}
                         timeout={durationMS}
-                        // onEntered={onAnimationEnd}
                     >
                         {(state) => {
                             return (

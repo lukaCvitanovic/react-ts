@@ -911,6 +911,26 @@ Ensure the default browser behavior of the `hidden` attribute.
           animation: growFadeIn 500ms ease-in-out 1;
 }
 
+.animate-\[growOver190_1500ms_ease-in-out_1\] {
+  -webkit-animation: growOver190 1500ms ease-in-out 1;
+          animation: growOver190 1500ms ease-in-out 1;
+}
+
+.animate-\[growOver80_1500ms_ease-in-out_1\] {
+  -webkit-animation: growOver80 1500ms ease-in-out 1;
+          animation: growOver80 1500ms ease-in-out 1;
+}
+
+.animate-\[growOver190_700ms_ease-in-out_1\] {
+  -webkit-animation: growOver190 700ms ease-in-out 1;
+          animation: growOver190 700ms ease-in-out 1;
+}
+
+.animate-\[growOver80_700ms_ease-in-out_1\] {
+  -webkit-animation: growOver80 700ms ease-in-out 1;
+          animation: growOver80 700ms ease-in-out 1;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }

@@ -21,9 +21,9 @@ type AnimationClasses = {
 
 const Results = ({ win, userChoice, computerChoice }: ResultsProps & BaseProps) => {
     const [{ outer, middle, inner }, setAnimationClasses] = useState<AnimationClasses>({
-        outer: 'animate-[growOver190_500ms_ease-in-out_1] scale-[190%]',
-        middle: 'animate-[growOver80_500ms_ease-in-out_1] scale-[80%] animate-delay-100',
-        inner: 'animate-[growOver80_500ms_ease-in-out_1] scale-[80%] animate-delay-200',
+        outer: 'animate-[growOver190_700ms_ease-in-out_1] scale-[190%]',
+        middle: 'animate-[growOver80_700ms_ease-in-out_1] scale-[80%] animate-delay-100',
+        inner: 'animate-[growOver80_700ms_ease-in-out_1] scale-[80%] animate-delay-200',
     });
     const [leaveTransition, setLeaveTransition] = useState(true);
 

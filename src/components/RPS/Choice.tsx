@@ -40,9 +40,11 @@ const ChoiceRPS = ({ variant, onClick, className, disabled = false, scale, getCh
     const imageClass = `z-10 ${imageScaling}`;
 
     const ref = useRef<HTMLButtonElement>(null);
+    const dep = ref.current?.getBoundingClientRect() ? [ref.current?.getBoundingClientRect().x, ref.current?.getBoundingClientRect().y] : [0, 0];
+
     useLayoutEffect(() => {
         if(getChoiceCoordinates) getChoiceCoordinates(ref.current?.getBoundingClientRect());
-    }, []);
+    }, dep);
 
     return (
         <button
