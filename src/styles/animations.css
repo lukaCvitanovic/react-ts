@@ -1,0 +1,76 @@
+@keyframes growOver190 {
+    0% {
+        transform: scale(0);
+    }
+    75% {
+        transform: scale(2.09);
+    }
+    100% {
+        transform: scale(1.9);
+    }
+}
+
+@keyframes growOver190ReverseDelay200 {
+    0% {
+        transform: scale(1.9);
+    }
+    28.57% {
+        transform: scale(1.9);
+    }
+    46.42% {
+        transform: scale(2.09);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes growOver80 {
+    0% {
+        transform: scale(0);
+    }
+    75% {
+        transform: scale(0.88);
+    }
+    100% {
+        transform: scale(0.8);
+    }   
+}
+
+@keyframes growOver80ReverseDelay100 {
+    0% {
+        transform: scale(0.8);
+    }
+    16.66% {
+        transform: scale(0.8);
+    }
+    37.495% {
+        transform: scale(0.88);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes growOver80Reverse {
+    0% {
+        transform: scale(0.8);
+    }
+    25% {
+        transform: scale(0.88);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes growFadeIn {
+    from {
+        transform: scale(0.75);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

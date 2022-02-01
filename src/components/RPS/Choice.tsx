@@ -1,7 +1,7 @@
 import paperIcon from '@/assets/images/icon-paper.svg';
 import scissorsIcon from '@/assets/images/icon-scissors.svg';
 import rockIcon from '@/assets/images/icon-rock.svg';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useLayoutEffect, useRef } from 'react';
 import { BaseProps } from '@/helpers/types';
 
 const CHOICE = {
@@ -14,9 +14,12 @@ type ChoiceProps = {
     variant: 'paper' | 'scissors' | 'rock',
     onClick?: MouseEventHandler,
     scale?: boolean,
+    disabled?: boolean,
+    getChoiceCoordinates?: Function,
+    style?: object,
 };
 
-const ChoiceRPS = ({ variant, onClick, className, scale }: ChoiceProps & BaseProps) => {
+const ChoiceRPS = ({ variant, onClick, className, disabled = false, scale, getChoiceCoordinates, style }: ChoiceProps & BaseProps) => {
     const { src, gradientColorBright, gradientColorDark, darkerBackground } = CHOICE[variant];
 
     const performScaling = scale || false;
@@ -33,13 +36,21 @@ const ChoiceRPS = ({ variant, onClick, className, scale }: ChoiceProps & BasePro
     const backgroundScaling = performScaling ? 'md:top-[9px] lg:top-[1.125rem] md:h-[10.5rem] md:w-[10.5rem] lg:h-[17.5rem] lg:w-[17.5rem]' : '';
     const backgroundClass = `absolute top-1.5 h-28 w-28 ${backgroundScaling} rounded-full bg-white`;
 
-    const imageScaling = performScaling ? 'md:w-[4rem] lg:w-[6.25rem]' : '';
+    const imageScaling = performScaling ? 'md:w-[4.59rem] lg:w-[7.65rem]' : '';
     const imageClass = `z-10 ${imageScaling}`;
+
+    const ref = useRef<HTMLButtonElement>(null);
+    useLayoutEffect(() => {
+        if(getChoiceCoordinates) getChoiceCoordinates(ref.current?.getBoundingClientRect());
+    }, []);
 
     return (
         <button
             onClick={onClick}
             className={className}
+            style={style}
+            disabled={disabled}
+            ref={ref}
         >
             <div className="relative flex items-center justify-center">
                 <div className={colorOutlineClass}>

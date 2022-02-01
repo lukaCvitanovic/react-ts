@@ -1,0 +1,140 @@
+Internationalization
+    * osim jezika ukljucuje i datume, valute, mjerne jedinice itd.
+    - postavljanje koda za lokalizaciju
+        - lokalizacija je proces prevodenja
+        - internacionalizacija je proces modificiranja koda da bude language agnostic
+    - u kodu zmjeniti konkatenaciju stringova
+        - je moze vrijediti za jedan jezika, a ne za vise njih
+    - koristiti placeholdere
+    - placeholderi se izvlace iz filova za pojedini jezik
+        - fileovi su podijeljenji u logicke sekcije po pitanju jezika
+        - 1 file po jeziku
+    * kod mora moci podrzati tekstove razlicitih duzina
+        - utjece na UI
+    - dobro je imati prijevod teksta radi lakseg uocavanja utjecaja prijvoda na UI
+    - Ukoliko se koriste slike ili simboli, potrebno je koristi one koji odgvaraju jeziku i kulturi
+        - znakovi ruku su dobar prijmer simbola koji imaju razlicito znacenje u razlicitim kulturama
+    - voditi racuna o plurarnosti rijecti i brojeva prilikom prevodenja
+    * omoguciti detekciju preferiranog jezika korisnika
+    * prijedlog koristiti i18next na frontendu i backendu
+        - na backendu generira emailove i druge poruke ili notifikacije koje se salju korisniku
+    * omogucit jednostavno dodavanje novih jezika i lokalizacija
+    -* dobar practice bi bio da i18n software korisiti iste confige i prijevode za lokalizaciju
+        - omogucava potizanje osjecaja unificiranosti izmedu fronteda i backenda kao jednu cijelinu
+
+    Suggested tech:
+        -i18next
+            - supports react and node.js
+            - could use only one config and localization files for bouth backend and frontend
+        - for translation ML translators like Google translate or DeepL 
+
+    Requirements:
+        - String concatination should be avoided throughout the app
+            - could result in dificult localization on different languages
+        - Formating of dates, number, curency and etc. will be done by i18n system
+
+    Stories:
+        -* User shoul be able to change language used in Kairos from any page
+            User is able to change language used via language selector that is accesible on every page.
+            Selector list every language that Kairos has localization for.
+            When user selects the language from language selector the site changes tha language and formating of numbers, dates, curencies and so on. The selected language is
+            also used in error messages, notification, emails and ets. The inital language used is derived from language
+            used in browser, if for some reason it is not possible to detect browser lanugage, the default language is english. The selected localization will be likned to the user account so that the site will used user
+            prefferd language every time the user loggs into the Kairos.
+            - Requirement: UI should be able to handle text of varying size
+            - Requirement: Formating of dates, number, curency and etc. will be done by i18n system
+        ?- The site should be able to recognize the language that user prefers (from browser)
+        - Emails, notifications, error messages and etc. should use language that is selected
+            - Requirement: frontend and backend should use the selected localization
+        -* Adding future languages to the system will only require creating new translation files
+        - After user changed the localization, that change will persist between sessions and devices
+
+        + Research ways to implement localiztion
+            Description:
+                As a user, after the language is chosen, I want that the site uses desierd lanugage in every peice
+                of text that I see on the site (including error messages, notifications and emails).
+            AC:
+                - choose localization software that can be applied to the whole application
+                - devise a way of loading translations and/or some other resourses used for localization
+
+        + Adding new languages
+            Description:
+                As a Developer, It requires me minimal effort to add new language to the site
+            AC:
+                - addition of the new language requires the addition of transltion resource for that language
+                - addition of the new language requires the addition of the new language to the list of lanugaes that user can select
+
+        + User can change site language
+            Description:
+                As a user, I want to be able to change the language used on the site from any point in the Kairos
+            AC:
+                - site language can be changed from every page in Kairos
+                - user can choose the language that Kairos has localization for
+                - after the language is selected the correct language is applied to the site
+
+        + Link selected language with user account
+            Description:
+                As a user, I want the site to use my selected localization every time I logg into the site, regardles
+                of session or device.
+            AC:
+                - users selected language is used every time he loggs into the site
+                - initial and default lanugages are ignored if user has selected some language
+
+        + Formating
+            Descriptions:
+                As a user, when I choose a language, dates, numbers, measurement units and etc. is change to accoirding format
+            AC:
+                - formating must match the selected language, US date format can't be used if the selected language is Croatian
+                - formating schemes needs to be cupled with the language, not hardcoded
+
+        + Initial and default language
+            Description:
+                As a user I want the site to use my browser prefered language as the initial language if that
+                localization option is available.
+                If that information is not available use english as a default language.
+            AC:
+                - site will use the language that the users browser is using
+                - if that localization is not supported by the site use english
+                - if information of language used in the browser is not available use english
+
+        
+
+
+        + Research the architecture
+            As a user I want to be able to receive notification via email, SMS and in the future via Slack and in the app
+
+            ##Acceptance criteria:
+            - notification service needs to handle HTTP and pub/sub notification requests
+            - notification service handles all notification
+            - 
+        
+
+Notification Service
+    - to je zaseban node.js server
+    * sve notifikacije se izvrsavanju preko notification-servisa
+    - na koji nacin bi se mogla koristiti pub/sub komunikacija?
+        -? na primjeru sendgrida samo se mailovi mogu slati preko SMTP-a a ne preko pub/sub
+        -? dali se koristenje pub/sub protokola odnosi na kominikaciju izmedu Kairos-a i notification-servisa ili izmedu notification-servisa i korisnika
+            - kairos n-s
+    -? na koji nacin bi se mogli implementirati queue-ovi
+        - jednostano, koristenjem npm paketa
+    -? na koji nacin je koristenje pub/sub protokola rijesava problem ogranicenog broja slanja preko sendgrida
+    -? kako bi se mogao koristiti HTTP u komunikaciji Kairos n-s
+
+    Suggested tech:
+
+    Requirements:
+
+    Stories:
+        - All notifications are performed by notification service
+            When some notification is triggered in Kairos, Kairos sends the request for sendig the notification
+            to the notification service that can handle email with the future plans for SMS and posible Slack or in-app
+            notifications.
+
+            Kairos needs to be able to send requests for sending notification via HTTP or message queue in which Kairos is the producer
+            and notification service is subscriber.
+        - Sending emails
+            When notification service receives the request for sending and email, that request is placed in email queue. Email handeler
+            reads the requests from the email queue and sends the emails. If an email failed to send, that request is placed back into email
+            queue. If the same email failed to send, notification service will send an error message via SMS, Slack or some other means to the
+            Kairos admins.

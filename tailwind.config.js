@@ -1,4 +1,6 @@
-module.exports = {
+const withAnimations = require('animated-tailwindcss');
+
+module.exports = withAnimations({
   content: ["./src/**/*.{html,js,ts,tsx}"],
   theme: {
     fontFamily: {
@@ -16,4 +18,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+});
