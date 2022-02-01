@@ -1,6 +1,6 @@
 import ChoiceRPS from '@/components/RPS/Choice';
 import { Transition } from "react-transition-group";
-import bgTriangle from '@/assets/images/bg-triangle.svg'
+import bgTriangle from '@/assets/images/RPS/bg-triangle.svg'
 import { ResultTransitionContext } from '@/components/RPS/ResultTransitionProvider';
 import { BaseProps } from '@/helpers/types';
 import { MouseEvent, useContext, useEffect, useState } from 'react';

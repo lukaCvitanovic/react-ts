@@ -1,4 +1,4 @@
-import rulesImg from '@/assets/images/image-rules.svg';
+import rulesImg from '@/assets/images/RPS/image-rules.svg';
 import ButtonRPS from '@/components/RPS/ButtonRPS';
 import { Transition } from "react-transition-group";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

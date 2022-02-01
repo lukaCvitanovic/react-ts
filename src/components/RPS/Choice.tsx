@@ -1,6 +1,6 @@
-import paperIcon from '@/assets/images/icon-paper.svg';
-import scissorsIcon from '@/assets/images/icon-scissors.svg';
-import rockIcon from '@/assets/images/icon-rock.svg';
+import paperIcon from '@/assets/images/RPS/icon-paper.svg';
+import scissorsIcon from '@/assets/images/RPS/icon-scissors.svg';
+import rockIcon from '@/assets/images/RPS/icon-rock.svg';
 import { MouseEventHandler, useLayoutEffect, useRef } from 'react';
 import { BaseProps } from '@/helpers/types';
 
