@@ -121,14 +121,7 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
         let offset = 0;
         if (!column) offset = ref.current?.getBoundingClientRect().x || 0;
         return () => {
-            // setOldWidht(0);
-            // setOldXAxis(0);
-            // setInitialWidth(0);
-            // setInitialX(0);
-            if (!column && !offset) {
-                console.log('destroy1');
-                dispatch({ type: 'setRect', payload: new DOMRect() });
-            }
+            if (!column && !offset) dispatch({ type: 'setRect', payload: new DOMRect() });
         };
     }, [initialNavRect.x, initialNavRect.y])
     useEffect(() => {
@@ -139,12 +132,7 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
     useLayoutEffect(() => {
         let offset = 0;
         let a;
-        if (!column) a = ref.current?.getBoundingClientRect().x;
-        console.log(a);
-        offset = a || 0;
-        console.log(ref.current?.getBoundingClientRect());
-        console.log(offset);
-        console.log(initialNavRect);
+        if (!column) offset = ref.current?.getBoundingClientRect().x || 0;
         setLayoutOffset(offset);
     }, []);
 

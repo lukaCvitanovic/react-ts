@@ -25,10 +25,7 @@ const NavButton = ({ to, number, title, column = false, initialRectFlag }: NavBu
     const numeration = `0${number}`;
 
     const setRect = (isActive: boolean) => {
-        if (isActive && isEqual(navRect.toJSON(), new DOMRect().toJSON())) {
-            console.log(title);
-            dispatch({ type: 'setInitialRect', payload: ref.current?.getBoundingClientRect() || new DOMRect() });
-        }
+        if (isActive && isEqual(navRect.toJSON(), new DOMRect().toJSON())) dispatch({ type: 'setInitialRect', payload: ref.current?.getBoundingClientRect() || new DOMRect() });
     };
 
     const setCurrentRect = (e: MouseEvent) => dispatch({ type: 'setRect', payload: e.currentTarget.getBoundingClientRect() });
@@ -41,7 +38,6 @@ const NavButton = ({ to, number, title, column = false, initialRectFlag }: NavBu
 
     useEffect(() => window.addEventListener('resize', () => setScreenWidth(window.innerWidth)));
     useLayoutEffect(() => {
-        console.log('navButton');
         if (initialRectFlag) setRect(active);
     }, [active, initialRectFlag, screenWidth]);
 

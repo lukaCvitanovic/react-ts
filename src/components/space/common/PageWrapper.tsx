@@ -1,7 +1,7 @@
 import { BaseProps } from "@/helpers/types";
 
 const PageWrapper = ({ children, className }: BaseProps) => {
-    const pageClass = `p-10 pt-[8.5rem] bg-no-repeat bg-cover ${className}`;
+    const pageClass = `p-6 md:p-10 pt-[8.5rem] bg-no-repeat bg-cover ${className}`;
 
     return (
         <body className={pageClass}>

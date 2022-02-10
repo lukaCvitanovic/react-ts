@@ -11,6 +11,7 @@ module.exports = withAnimations({
         dark: '#3b4363',
         score: '#2a46c0',
         'header-outline': '#606e85',
+        'heading-color': '#D0D6F9',
 
         space: {
           black: '#0B0D17',
@@ -20,6 +21,8 @@ module.exports = withAnimations({
       backgroundImage: {
         'gradient-radial': 'radial-gradient(circle at top, #1f3756, #141539)',
         'space-home-desktop': "url('/src/assets/images/space/home/background-home-desktop.jpg')",
+        'space-home-tablet': "url('/src/assets/images/space/home/background-home-tablet.jpg')",
+        'space-home-mobile': "url('/src/assets/images/space/home/background-home-mobile.jpg')",
       }
     },
   },
