@@ -7,6 +7,7 @@ const Main = () => {
             <div className="flex flex-col px-4">
                 <Link to="todo">ToDo</Link>
                 <Link to="rps">Rock Paper Scissors</Link>
+                <Link to="space/home">Space</Link>
             </div>
         </div>
     );

@@ -3,7 +3,7 @@ import { UserChoice } from "@/components/RPS/Choices";
 
 export type BaseProps = Readonly<{
     className?: string,
-    children?: ReactElement,
+    children?: ReactElement | string,
     name?: string,
 }>;
 

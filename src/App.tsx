@@ -3,6 +3,10 @@ import Main from '@/views/Main';
 import CommonHeader from '@/components/common/CommonHeader';
 import ToDo from '@/views/todo/ToDo';
 import RockPaperScissors from '@/views/RPS/RockPaperScissors';
+import NavBar from '@/components/space/common/navigation/NavBar';
+import SpaceLanding from '@/views/space/SpaceLanding';
+import Destinations from '@/views/space/Destinations';
+import Crews from '@/views/space/Crews';
 import '@/styles/tailwind.css';
 
 function App() {
@@ -24,6 +28,23 @@ function App() {
           path="rps"
           element={<RockPaperScissors />}
         />
+        <Route
+          path="space"
+          element={<NavBar />}
+        >
+          <Route
+            path="home"
+            element={<SpaceLanding />}
+          />
+          <Route
+            path="destinations"
+            element={<Destinations />}
+          />
+          <Route
+            path="crews"
+            element={<Crews />}
+          />
+        </Route>
       </Route>
     </Routes>
   );

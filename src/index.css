@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.space-heading1 {
+    @apply text-[150px] font-[Bellefair]
+}
+
+.space-heading2 {
+    @apply text-[100px] font-[Bellefair]
+}
+
+.space-heading3 {
+    @apply text-[3.5rem] font-[Bellefair]
+}
+
+.space-heading4 {
+    @apply text-[2rem] font-[Bellefair]
+}
+
+.sapace-heading5 {
+    @apply text-[1.75rem] tracking-[4.75ch]
+}
+
+.space-subheading1 {
+    @apply text-[1.75rem] font-[Bellefair]
+}
+
+.space-subheading2 {
+    @apply text-[0.875rem] tracking-[2.35ch]
+}
+
+.nav-text {
+    @apply text-base tracking-[2.7ch]
+}
+
+.body-text {
+    @apply text-[1.125rem] 
+}
