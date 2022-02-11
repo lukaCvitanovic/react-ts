@@ -20,15 +20,15 @@
     }
     
     .space-heading5 {
-        @apply text-[1.75rem] text-heading-color tracking-[4.75px] uppercase
+        @apply text-[1.75rem] tracking-[4.75px] uppercase
     }
     
     .space-subheading1 {
-        @apply text-[1.75rem] font-[Bellefair]
+        @apply text-[1.75rem] font-[Bellefair] uppercase
     }
     
     .space-subheading2 {
-        @apply text-[0.875rem] tracking-[2.35px]
+        @apply text-[0.875rem] tracking-[2.35px] uppercase
     }
     
     .nav-text {

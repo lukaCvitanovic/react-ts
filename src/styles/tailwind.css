@@ -478,6 +478,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-transform: uppercase;
 }
 
+.space-heading3 {
+  font-family: Bellefair;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+}
+
+.space-subheading1 {
+  font-family: Bellefair;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+}
+
+.space-subheading2 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 2.35px;
+}
+
 .nav-text {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -580,16 +598,32 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 2rem;
 }
 
-.mt-20 {
-  margin-top: 5rem;
+.mr-\[1\.125rem\] {
+  margin-right: 1.125rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
 }
 
 .mt-4 {
   margin-top: 1rem;
 }
 
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
+}
+
 .mt-16 {
   margin-top: 4rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
 }
 
 .block {
@@ -640,6 +674,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2rem;
 }
 
+.h-\[10\.5rem\] {
+  height: 10.5rem;
+}
+
 .h-max {
   height: -webkit-max-content;
   height: max-content;
@@ -655,6 +693,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-5 {
   height: 1.25rem;
+}
+
+.h-\[28rem\] {
+  height: 28rem;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .w-max {
@@ -678,6 +724,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 9.375rem;
 }
 
+.w-\[10\.5rem\] {
+  width: 10.5rem;
+}
+
 .w-12 {
   width: 3rem;
 }
@@ -692,6 +742,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-\[28rem\] {
+  width: 28rem;
 }
 
 .max-w-\[305px\] {
@@ -860,6 +914,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: space-between;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 .gap-y-4 {
   row-gap: 1rem;
 }
@@ -875,6 +933,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-y-8 {
   row-gap: 2rem;
+}
+
+.gap-x-6 {
+  -webkit-column-gap: 1.5rem;
+          column-gap: 1.5rem;
 }
 
 .overflow-hidden {
@@ -914,6 +977,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-width: 1px;
 }
 
+.border-t {
+  border-top-width: 1px;
+}
+
 .border-t-0 {
   border-top-width: 0px;
 }
@@ -949,6 +1016,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.border-\[\#383B4B\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(56 59 75 / var(--tw-border-opacity));
 }
 
 .border-white\/0 {
@@ -1016,6 +1088,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-space-home-desktop {
   background-image: url('/src/assets/images/space/home/background-home-desktop.jpg');
+}
+
+.bg-space-destination-mobile {
+  background-image: url('/src/assets/images/space/destination/background-destination-mobile.jpg');
 }
 
 .bg-space-home-mobile {
@@ -1105,6 +1181,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-12 {
   padding-left: 3rem;
   padding-right: 3rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
 }
 
 .pb-6 {
@@ -1241,6 +1321,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-orange-500 {
   --tw-text-opacity: 1;
   color: rgb(249 115 22 / var(--tw-text-opacity));
+}
+
+.text-white\/25 {
+  color: rgb(255 255 255 / 0.25);
 }
 
 .text-heading-color {
@@ -1381,22 +1465,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-top: 0px;
   }
 
-  .sm\:mt-\[\] {
-    margin-top: ;
-  }
-
-  .sm\:mt-\[0\.5rem\] {
-    margin-top: 0.5rem;
-  }
-
-  .sm\:mt-\[9\.5rem\] {
-    margin-top: 9.5rem;
-  }
-
-  .sm\:block {
-    display: block;
-  }
-
   .sm\:flex {
     display: flex;
   }
@@ -1407,26 +1475,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:h-20 {
     height: 5rem;
-  }
-
-  .sm\:h-\[\] {
-    height: ;
-  }
-
-  .sm\:h-\[15rem\] {
-    height: 15rem;
-  }
-
-  .sm\:w-\[15rem\] {
-    width: 15rem;
-  }
-
-  .sm\:items-center {
-    align-items: center;
-  }
-
-  .sm\:justify-center {
-    justify-content: center;
   }
 
   .sm\:gap-y-6 {
@@ -1441,10 +1489,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     border-radius: 0.5rem;
   }
 
-  .sm\:bg-space-home-tablet {
-    background-image: url('/src/assets/images/space/home/background-home-tablet.jpg');
-  }
-
   .sm\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -1453,18 +1497,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   .sm\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
-  }
-
-  .sm\:pb-0 {
-    padding-bottom: 0px;
-  }
-
-  .sm\:pb-\[\] {
-    padding-bottom: ;
-  }
-
-  .sm\:pb-\[4\.125rem\] {
-    padding-bottom: 4.125rem;
   }
 
   .sm\:text-sm {
@@ -1502,11 +1534,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     letter-spacing: 4.75px;
   }
 
-  .md\:space-heading5 {
-    --tw-text-opacity: 1;
-    color: rgb(208 214 249 / var(--tw-text-opacity));
-  }
-
   .md\:body-text {
     font-size: 1.125rem;
   }
@@ -1535,8 +1562,20 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-top: 2.5rem;
   }
 
+  .md\:mt-\[3\.75rem\] {
+    margin-top: 3.75rem;
+  }
+
+  .md\:mt-2 {
+    margin-top: 0.5rem;
+  }
+
   .md\:mt-\[9\.5rem\] {
     margin-top: 9.5rem;
+  }
+
+  .md\:mt-8 {
+    margin-top: 2rem;
   }
 
   .md\:block {
@@ -1565,12 +1604,12 @@ Ensure the default browser behavior of the `hidden` attribute.
     height: fit-content;
   }
 
-  .md\:h-\[17rem\] {
-    height: 17rem;
-  }
-
   .md\:h-\[15rem\] {
     height: 15rem;
+  }
+
+  .md\:h-\[18\.75rem\] {
+    height: 18.75rem;
   }
 
   .md\:w-\[13\.5rem\] {
@@ -1591,12 +1630,12 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: fit-content;
   }
 
-  .md\:w-\[17rem\] {
-    width: 17rem;
-  }
-
   .md\:w-\[15rem\] {
     width: 15rem;
+  }
+
+  .md\:w-\[18\.75rem\] {
+    width: 18.75rem;
   }
 
   .md\:scale-125 {
@@ -1618,6 +1657,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     align-items: flex-end;
   }
 
+  .md\:justify-start {
+    justify-content: flex-start;
+  }
+
   .md\:justify-end {
     justify-content: flex-end;
   }
@@ -1626,8 +1669,18 @@ Ensure the default browser behavior of the `hidden` attribute.
     justify-content: space-between;
   }
 
-  .md\:gap-y-6 {
-    row-gap: 1.5rem;
+  .md\:justify-evenly {
+    justify-content: space-evenly;
+  }
+
+  .md\:gap-x-8 {
+    -webkit-column-gap: 2rem;
+            column-gap: 2rem;
+  }
+
+  .md\:gap-x-9 {
+    -webkit-column-gap: 2.25rem;
+            column-gap: 2.25rem;
   }
 
   .md\:rounded-lg {
@@ -1639,29 +1692,57 @@ Ensure the default browser behavior of the `hidden` attribute.
     background-color: rgb(0 0 0 / var(--tw-bg-opacity));
   }
 
+  .md\:bg-space-destination-tablet {
+    background-image: url('/src/assets/images/space/destination/background-destination-tablet.jpg');
+  }
+
   .md\:bg-space-home-tablet {
     background-image: url('/src/assets/images/space/home/background-home-tablet.jpg');
   }
 
-  .md\:bg-space-home-desktop {
-    background-image: url('/src/assets/images/space/home/background-home-desktop.jpg');
+  .md\:px-14 {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
   }
 
-  .md\:p-10 {
-    padding: 2.5rem;
-  }
-
-  .md\:pl-10 {
+  .md\:px-10 {
     padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .md\:pb-14 {
+    padding-bottom: 3.5rem;
   }
 
   .md\:pb-\[4\.125rem\] {
     padding-bottom: 4.125rem;
   }
 
+  .md\:pb-10 {
+    padding-bottom: 2.5rem;
+  }
+
+  .md\:pl-10 {
+    padding-left: 2.5rem;
+  }
+
   .md\:text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-\[5rem\] {
+    font-size: 5rem;
+  }
+
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .md\:opacity-0 {
@@ -1674,12 +1755,60 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 @media (min-width: 1024px) {
+  .lg\:space-heading2 {
+    font-family: Bellefair;
+  }
+
+  .lg\:space-heading2 {
+    font-size: 100px;
+  }
+
+  .lg\:space-heading2 {
+    text-transform: uppercase;
+  }
+
+  .lg\:space-heading5 {
+    font-size: 1.75rem;
+  }
+
+  .lg\:space-heading5 {
+    text-transform: uppercase;
+  }
+
+  .lg\:space-heading5 {
+    letter-spacing: 4.75px;
+  }
+
   .lg\:top-\[1\.125rem\] {
     top: 1.125rem;
   }
 
   .lg\:top-10 {
     top: 2.5rem;
+  }
+
+  .lg\:mt-3 {
+    margin-top: 0.75rem;
+  }
+
+  .lg\:mt-\[3\.375rem\] {
+    margin-top: 3.375rem;
+  }
+
+  .lg\:mt-24 {
+    margin-top: 6rem;
+  }
+
+  .lg\:ml-16 {
+    margin-left: 4rem;
+  }
+
+  .lg\:mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  .lg\:mt-20 {
+    margin-top: 5rem;
   }
 
   .lg\:block {
@@ -1702,6 +1831,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     height: 17rem;
   }
 
+  .lg\:h-\[28rem\] {
+    height: 28rem;
+  }
+
   .lg\:w-\[22\.5rem\] {
     width: 22.5rem;
   }
@@ -1714,16 +1847,28 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 7.65rem;
   }
 
-  .lg\:w-full {
-    width: 100%;
-  }
-
   .lg\:w-\[17rem\] {
     width: 17rem;
   }
 
+  .lg\:w-full {
+    width: 100%;
+  }
+
+  .lg\:w-\[28rem\] {
+    width: 28rem;
+  }
+
   .lg\:max-w-5xl {
     max-width: 64rem;
+  }
+
+  .lg\:max-w-\[69\.5rem\] {
+    max-width: 69.5rem;
+  }
+
+  .lg\:max-w-\[28rem\] {
+    max-width: 28rem;
   }
 
   .lg\:max-w-\[60\%\] {
@@ -1734,13 +1879,46 @@ Ensure the default browser behavior of the `hidden` attribute.
     flex-direction: row;
   }
 
+  .lg\:items-start {
+    align-items: flex-start;
+  }
+
+  .lg\:items-end {
+    align-items: flex-end;
+  }
+
+  .lg\:justify-start {
+    justify-content: flex-start;
+  }
+
+  .lg\:justify-center {
+    justify-content: center;
+  }
+
+  .lg\:justify-between {
+    justify-content: space-between;
+  }
+
+  .lg\:gap-x-20 {
+    -webkit-column-gap: 5rem;
+            column-gap: 5rem;
+  }
+
   .lg\:bg-space-home-desktop {
     background-image: url('/src/assets/images/space/home/background-home-desktop.jpg');
+  }
+
+  .lg\:p-0 {
+    padding: 0px;
   }
 
   .lg\:px-\[7\.8125rem\] {
     padding-left: 7.8125rem;
     padding-right: 7.8125rem;
+  }
+
+  .lg\:pt-20 {
+    padding-top: 5rem;
   }
 
   .lg\:pb-28 {
@@ -1753,5 +1931,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:pl-\[7\.5rem\] {
     padding-left: 7.5rem;
+  }
+
+  .lg\:text-left {
+    text-align: left;
   }
 }

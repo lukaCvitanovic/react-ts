@@ -1,8 +1,9 @@
 import close from '@/assets/images/space/shared/icon-close.svg';
-import { MouseEventHandler, forwardRef, LegacyRef, useRef, useEffect } from 'react';
+import { MouseEventHandler, forwardRef, LegacyRef } from 'react';
 import Navigations from '@/components/space/common/navigation/Navigations';
 import AnimatedNavBorder from "@/components/space/transitions/AnimatedNavBorder";
 import { BaseProps } from '@/helpers/types';
+import { mainNavigationData } from '@/components/space/common/navigation/NavBar';
 
 type SideNavProps = {
     onClose: MouseEventHandler,
@@ -25,7 +26,10 @@ const SideNav = ({ onClose }: SideNavProps & BaseProps, ref: LegacyRef<HTMLDivEl
                 </button>
             </div>
             <nav className='flex flex-col gap-y-8 mt-16 text-white'>
-                <Navigations column />
+                <Navigations
+                    column
+                    navigationData={mainNavigationData}
+                />
                 <AnimatedNavBorder column />
             </nav>
         </aside>

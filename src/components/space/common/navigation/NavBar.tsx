@@ -3,8 +3,32 @@ import Navigations from "@/components/space/common/navigation/Navigations";
 import AnimatedNavBorder from "@/components/space/transitions/AnimatedNavBorder";
 import SpaceLogo from "@/components/space/common/SpaceLogo";
 import SideNavButton from "@/components/space/common/navigation/SideNavButton";
+import { NavButtonProps } from "@/components/space/common/navigation/NavButton";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+export const mainNavigationData: NavButtonProps[] = [
+    {
+        to: '/space/home',
+        number: 0,
+        title: 'home'
+    },
+    {
+        to: '/space/destinations',
+        number: 1,
+        title: 'destination'
+    },
+    {
+        to: '/space/crews',
+        number: 2,
+        title: 'crew'
+    },
+    {
+        to: '/space/technologies',
+        number: 3,
+        title: 'technology'
+    },
+];
 
 const NavBar = () => {
     const [columnNav, setColumnNav] = useState(false);
@@ -22,7 +46,7 @@ const NavBar = () => {
                         <div className="absolute left-[6.375rem]  z-10 h-px w-1/3 pr-3 bg-white/[.25] mix-blend-normal"></div>
                     </div>
                     <nav className="hidden md:flex px-12 lg:pl-[7.5rem] md:w-fit lg:w-full shrink lg:max-w-[60%] gap-x-12 text-white backdrop-blur-[5.125rem] bg-white/[.04]">
-                        <Navigations />
+                        <Navigations navigationData={mainNavigationData} />
                         {!columnNav &&
                             <AnimatedNavBorder />
                         }

@@ -8,13 +8,15 @@ export type NavButtonProps = {
     number: number,
     title: string,
     column?: boolean,
+    small?: boolean,
+    showNumber?: boolean,
 };
 
 type NavButtonMetaProps = {
     initialRectFlag: boolean,  
 };
 
-const NavButton = ({ to, number, title, column = false, initialRectFlag }: NavButtonProps & NavButtonMetaProps) => {
+const NavButton = ({ to, number, title, column = false, small = false, showNumber = true, initialRectFlag }: NavButtonProps & NavButtonMetaProps) => {
     const { dispatch, state: { navRect } } = useContext(NavTransitionContext);
 
     const [active, setActive] = useState(false);
@@ -32,8 +34,9 @@ const NavButton = ({ to, number, title, column = false, initialRectFlag }: NavBu
 
     const isActive = ({ isActive }: { isActive: boolean }) => {
         setActive(isActive);
+        const smallClass = (small ? `h-10 text-sm md:text-base ${(isActive ? 'text-white' : 'text-heading-color')}` : 'h-24');
         const defaultClass = 'w-max flex items-center border-white/0 hover:border-white/50';
-        return (column ? `h-8 px-8 w-full border-r-[3px] ${defaultClass} justify-start` : `h-24 border-b-[3px] ${defaultClass} justify-center`);
+        return (column ? `h-8 px-8 w-full border-r-[3px] ${defaultClass} justify-start` : `${smallClass} border-b-[3px] ${defaultClass} justify-center`);
     };
 
     useEffect(() => window.addEventListener('resize', () => setScreenWidth(window.innerWidth)));
@@ -51,7 +54,9 @@ const NavButton = ({ to, number, title, column = false, initialRectFlag }: NavBu
             onClick={setCurrentRect}
             ref={ref}
         >
-            <span className={numerationClass}>{numeration}</span>
+            {showNumber &&
+                <span className={numerationClass}>{numeration}</span>
+            }
             <span className="uppercase">{title}</span>
         </NavLink>
     );
