@@ -5,9 +5,10 @@ import ToDo from '@/views/todo/ToDo';
 import RockPaperScissors from '@/views/RPS/RockPaperScissors';
 import NavBar from '@/components/space/common/navigation/NavBar';
 import SpaceLanding from '@/views/space/SpaceLanding';
-import Destinations from '@/views/space/Destinations';
+import destinations from '@/views/space/Destinations';
 import Crews from '@/views/space/Crews';
 import '@/styles/tailwind.css';
+
 
 function App() {
   return (
@@ -38,8 +39,11 @@ function App() {
           />
           <Route
             path="destinations"
-            element={<Destinations />}
-          />
+          >
+            <>
+              {destinations}
+            </>
+          </Route>
           <Route
             path="crews"
             element={<Crews />}
