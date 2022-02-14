@@ -503,6 +503,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   letter-spacing: 2.7px;
 }
 
+.body-text {
+  font-size: 1.125rem;
+}
+
 .fixed {
   position: fixed;
 }
@@ -626,6 +630,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 4rem;
 }
 
+.mr-4 {
+  margin-right: 1rem;
+}
+
 .block {
   display: block;
 }
@@ -699,6 +707,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 1.25rem;
 }
 
+.h-56 {
+  height: 14rem;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
+.h-2\.5 {
+  height: 0.625rem;
+}
+
 .w-max {
   width: -webkit-max-content;
   width: max-content;
@@ -738,6 +758,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-2\.5 {
+  width: 0.625rem;
+}
+
+.w-2 {
+  width: 0.5rem;
 }
 
 .max-w-\[305px\] {
@@ -874,8 +902,61 @@ Ensure the default browser behavior of the `hidden` attribute.
   resize: both;
 }
 
+.auto-cols-auto {
+  grid-auto-columns: auto;
+}
+
+.grid-flow-row {
+  grid-auto-flow: row;
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+
+.grid-flow-row-dense {
+  grid-auto-flow: row dense;
+}
+
+.grid-flow-col-dense {
+  grid-auto-flow: column dense;
+}
+
+.auto-rows-auto {
+  grid-auto-rows: auto;
+}
+
+.auto-rows-min {
+  grid-auto-rows: -webkit-min-content;
+  grid-auto-rows: min-content;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-rows-3 {
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.grid-rows-\[\] {
+  grid-template-rows: ;
+}
+
+.grid-rows-\[repeat\] {
+  grid-template-rows: repeat;
+}
+
+.grid-rows-\[repeat\(\)\] {
+  grid-template-rows: repeat();
+}
+
+.grid-rows-\[repeat\(3\2c minmax\)\] {
+  grid-template-rows: repeat(3,minmax);
+}
+
+.grid-rows-\[repeat\(3\2c minmax\(\)\)\] {
+  grid-template-rows: repeat(3,minmax());
 }
 
 .flex-col {
@@ -1019,6 +1100,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(255 255 255 / 0);
 }
 
+.border-white\/25 {
+  border-color: rgb(255 255 255 / 0.25);
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1068,6 +1153,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-white\/\[\.04\] {
   background-color: rgb(255 255 255 / .04);
+}
+
+.bg-white\/\[\] {
+  background-color: rgb(255 255 255 / );
+}
+
+.bg-white\/\[\.17\] {
+  background-color: rgb(255 255 255 / .17);
 }
 
 .bg-gradient-to-t {
@@ -1175,6 +1268,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 3rem;
 }
 
+.px-\[4\.75rem\] {
+  padding-left: 4.75rem;
+  padding-right: 4.75rem;
+}
+
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1209,6 +1307,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .font-\[Bellefair\] {
   font-family: Bellefair;
+}
+
+.font-\[Be\] {
+  font-family: Be;
+}
+
+.font-\[Bellefaiw\] {
+  font-family: Bellefaiw;
 }
 
 .text-lg {
@@ -1329,6 +1435,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
+.text-white\/10 {
+  color: rgb(255 255 255 / 0.1);
+}
+
+.text-white\/50 {
+  color: rgb(255 255 255 / 0.5);
+}
+
 .opacity-0 {
   opacity: 0;
 }
@@ -1426,6 +1540,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hover\:border-white\/50:hover {
   border-color: rgb(255 255 255 / 0.5);
+}
+
+.hover\:bg-white\/50:hover {
+  background-color: rgb(255 255 255 / 0.5);
 }
 
 .hover\:text-red-500:hover {

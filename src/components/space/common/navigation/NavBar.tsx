@@ -14,7 +14,7 @@ export const mainNavigationData: NavButtonProps[] = [
         title: 'home'
     },
     {
-        to: '/space/destinations',
+        to: '/space/destinations/moon',
         number: 1,
         title: 'destination'
     },
