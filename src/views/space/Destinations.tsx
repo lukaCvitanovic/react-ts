@@ -4,9 +4,8 @@ import Navigations from "@/components/space/common/navigation/Navigations";
 import { NavButtonProps } from "@/components/space/common/navigation/NavButton";
 import { Route } from "react-router-dom";
 import data from "@/assets/data/space/data.json";
-import last from 'lodash/last';
-import first from 'lodash/first';
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useImportImage from "@/helpers/space/useImportImage";
 
 const destiantionsNavigationData: NavButtonProps[] = [
     {
@@ -50,12 +49,7 @@ type DestinationProp = {
 const Destination = ({ name, images: { png }, description, distance, travel }: DestinationProp) => {
     const [image, setImage] = useState<string>('');
 
-    useEffect(() => {
-        import('@/assets/images/space/destination/' + last(png.split('/'))).then((module) => {
-            const path = first(Object.values(module));
-            if (typeof path === 'string') setImage(path);
-        });
-    }, [png]);
+    useImportImage(png, 'destination/', setImage);
 
     return (
         <PageWrapper className="lg:flex lg:justify-center h-screen bg-space-destination-mobile md:bg-space-destination-tablet lg:space-destination-desktop text-white">

@@ -19,7 +19,7 @@ export const mainNavigationData: NavButtonProps[] = [
         title: 'destination'
     },
     {
-        to: '/space/crews',
+        to: '/space/crews/douglas-hurley',
         number: 2,
         title: 'crew'
     },
