@@ -35,7 +35,7 @@ const NavButton = ({ to, number, title, column = false, small = false, showNumbe
 
     const isActive = ({ isActive }: { isActive: boolean }) => {
         setActive(isActive);
-        if (circle) return 'h-2.5 w-2.5';
+        if (circle) return 'h-2.5 w-2.5 lg:h-4 lg:w-4';
         const smallClass = (small ? `h-10 text-sm md:text-base ${(isActive ? 'text-white' : 'text-heading-color')}` : 'h-24');
         const defaultClass = 'w-max flex items-center border-white/0 hover:border-white/50';
         return (column ? `h-8 px-8 w-full border-r-[3px] ${defaultClass} justify-start` : `${smallClass} border-b-[3px] ${defaultClass} justify-center`);
@@ -48,21 +48,21 @@ const NavButton = ({ to, number, title, column = false, small = false, showNumbe
 
     const defaultNumerationClass = 'font-bold mr-3 tracking-[2.7px]';
     const numerationClass = (column ? defaultNumerationClass : `hidden lg:block ${defaultNumerationClass}`);
-    const circleClass = `rounded-full ${(active ? 'bg-white' : 'bg-white/[.17] hover:bg-white/50')}`;
+    const circleClass = `rounded-full w-full h-full ${(active ? 'bg-white' : 'bg-white/[.17] hover:bg-white/50')}`;
 
     const navContent = () => {
         if (circle) {
             return (
-                <div>
+                <div className={circleClass}></div>
+            );
+        } else {
+            return (
+                <div className="flex">
                     {showNumber &&
                         <span className={numerationClass}>{numeration}</span>
                     }
                     <span className="uppercase">{title}</span>
                 </div>
-            );
-        } else {
-            return (
-                <div className={circleClass}></div>
             );
         }
     };
