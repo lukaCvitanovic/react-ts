@@ -56,7 +56,7 @@ const Destination = ({ name, images: { png }, description, distance, travel }: D
             <div className="flex flex-col lg:flex-row lg:w-full lg:max-w-[69.5rem] lg:justify-between lg:pt-20">
                 <div className="flex flex-col items-center">
                     <div className="flex nav-text w-full justify-center md:justify-start">
-                        <span className="text-white/25 mr-[1.125rem] md:text-xl lg:space-heading5">01</span>
+                        <span className="text-white/25 mr-[1.125rem] font-bold md:text-xl lg:space-heading5">01</span>
                         <span className="md:text-xl lg:space-heading5">Pick your destination</span>
                     </div>
                     <img

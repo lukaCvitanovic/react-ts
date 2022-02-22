@@ -4,6 +4,11 @@ import technologyImagePortrait from "@/assets/images/space/technology/image-laun
 import Navigations from "@/components/space/common/navigation/Navigations";
 import NavTransitionProvider from "@/components/space/transitions/NavTransitionProvider";
 import { NavButtonProps } from "@/components/space/common/navigation/NavButton";
+import data from "@/assets/data/space/data.json";
+import kebabCase from "lodash/kebabCase"
+import { Route } from "react-router-dom";
+import useImportImage from "@/helpers/space/useImportImage";
+import { useState } from "react";
 
 const technologiesNavigationData: NavButtonProps[] = [
     {
@@ -26,7 +31,22 @@ const technologiesNavigationData: NavButtonProps[] = [
     },
 ];
 
-const Technologies = () => {
+type TechnologyProps = {
+    name: string,
+    images: {
+        portrait: string,
+        landscape: string,
+    },
+    description: string,
+};
+
+const Technology = ({ name, images: { landscape, portrait }, description }: TechnologyProps) => {
+    const [portraitImage, setPortraitImage] = useState<string>('');
+    const [landscapeImage, setLandscapeImage] = useState<string>('');
+
+    useImportImage(portrait, 'technology/', setPortraitImage);
+    useImportImage(landscape, 'technology/', setLandscapeImage);
+
     return (
         <PageWrapper
             paddingX={false}
@@ -39,12 +59,12 @@ const Technologies = () => {
                 </div>
                 <div className="flex w-screen justify-center mt-2 md:mt-4 lg:row-span-2 lg:col-start-3 lg:w-full lg:mt-0 lg:self-start lg:pt-[3.5rem]">
                     <img
-                        src={technologyImageLandscape}
+                        src={landscapeImage}
                         alt="technologyImage"
                         className="w-screen lg:hidden"
                     />
                     <img
-                        src={technologyImagePortrait}
+                        src={portraitImage}
                         alt="technologyImage"
                         className="hidden lg:block lg:w-full lg:max-w-[25rem] xl:min-w-[25rem] xl:max-w-[45rem]"
                     />
@@ -56,12 +76,22 @@ const Technologies = () => {
                 </NavTransitionProvider>
                 <div className="flex flex-col items-center px-6 md:px-10 md:w-full md:max-w-[29rem] lg:col-start-2 lg:row-start-2 lg:px-0 lg:max-w-full lg:items-start">
                     <span className="text-heading-color text-sm uppercase md:text-base lg:text-start">The technology ...</span>
-                    <span className="font-[Bellefair] text-xl text-white uppercase mt-2 md:text-[2.5rem] md:mt-4">Launch vehicle</span>
-                    <p className="body-text text-heading-color text-center mt-4 lg:text-left">A launch vehicle or carrier rocket is a rocket-propelled vehicle used to carry a payload from Earth's surface to space, usually to Earth orbit or beyond. Our WEB-X carrier rocket is the most powerful in operation. Standing 150 metres tall, it's quite an awe-inspiring sight on the launch pad!</p>
+                    <span className="font-[Bellefair] text-xl text-white uppercase mt-2 md:text-[2.5rem] md:mt-4">{name}</span>
+                    <p className="body-text text-heading-color text-center mt-4 lg:text-left">{description}</p>
                 </div>
             </div>
         </PageWrapper>
     );
 };
 
-export default Technologies;
+const technologies = data.technology.map((technology) => {
+    return (
+        <Route
+            path={kebabCase(technology.name)}
+            key={kebabCase(technology.name)}
+            element={<Technology {...technology} />}
+        />
+    );
+});
+
+export default technologies;

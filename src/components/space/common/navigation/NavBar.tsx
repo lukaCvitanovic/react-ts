@@ -24,7 +24,7 @@ export const mainNavigationData: NavButtonProps[] = [
         title: 'crew'
     },
     {
-        to: '/space/technologies',
+        to: '/space/technologies/launch-vehicle',
         number: 3,
         title: 'technology'
     },

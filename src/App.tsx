@@ -7,7 +7,7 @@ import NavBar from '@/components/space/common/navigation/NavBar';
 import SpaceLanding from '@/views/space/SpaceLanding';
 import destinations from '@/views/space/Destinations';
 import crews from '@/views/space/Crews';
-import Technologies from '@/views/space/Technologies';
+import technologies from '@/views/space/Technologies';
 import '@/styles/tailwind.css';
 
 
@@ -54,8 +54,11 @@ function App() {
           </Route>
           <Route
             path="technologies"
-            element={<Technologies />}
-          />
+          >
+            <>
+              {technologies}
+            </>
+          </Route>
         </Route>
       </Route>
     </Routes>
