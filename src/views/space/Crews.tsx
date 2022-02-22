@@ -49,7 +49,7 @@ const Crew = ({ number, name, images: { png }, role, bio }: CrewProp) => {
     useImportImage(png, 'crew/', setImage);
 
     return (
-        <PageWrapper className="h-screen bg-space-home-desktop text-white lg:flex lg:justify-center lg:items-start xl:px-[10.5rem]">
+        <PageWrapper className="h-screen bg-space-crew-mobile text-white md:bg-space-crew-tablet lg:bg-space-crew-desktop lg:flex lg:justify-center lg:items-start xl:px-[10.5rem]">
             <div className="grid grid-rows-[repeat(4, minmax(0, auto))] grid-cols-1 grid-flow-row auto-rows-auto gap-y-8 md:gap-y-10 items-center justify-center md:w-full md:justify-items-center lg:grid-rows-[min-content_min-content_1fr] lg:grid-cols-[auto_1fr] lg:gap-x-20 lg:justify-items-start lg:mt-[3.5rem] lg:h-full lg:max-w-[60.5625rem] xl:max-w-[78.5rem]">
                 <div className="flex w-full justify-center md:justify-start">
                     <span className="nav-text text-white/25 font-bold md:text-xl lg:space-heading5 mr-4">0{number}</span>
