@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { NavTransitionContext } from "@/components/space/transitions/NavTransitionProvider";
+import { NavTransitionContext, initialElement } from "@/components/space/transitions/NavTransitionProvider";
 import { MouseEvent, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
-import isEqual from "lodash/isEqual";
 
 export type NavButtonProps = {
     to: string,
@@ -19,7 +18,7 @@ type NavButtonMetaProps = {
 };
 
 const NavButton = ({ to, number, title, column = false, small = false, showNumber = true, circle = false, numbered = false, initialRectFlag }: NavButtonProps & NavButtonMetaProps) => {
-    const { dispatch, state: { navRect } } = useContext(NavTransitionContext);
+    const { dispatch, state: { navElement } } = useContext(NavTransitionContext);
 
     const [active, setActive] = useState(false);
     const [screenWidth, setScreenWidth] = useState(0);
@@ -29,10 +28,10 @@ const NavButton = ({ to, number, title, column = false, small = false, showNumbe
     const numeration = `0${number}`;
 
     const setRect = (isActive: boolean) => {
-        if (isActive && isEqual(navRect.toJSON(), new DOMRect().toJSON())) dispatch({ type: 'setInitialRect', payload: ref.current?.getBoundingClientRect() || new DOMRect() });
+        if (isActive && navElement.isEqualNode(initialElement)) dispatch({ type: 'setInitialElement', payload: ref.current || initialElement });
     };
 
-    const setCurrentRect = (e: MouseEvent) => dispatch({ type: 'setRect', payload: e.currentTarget.getBoundingClientRect() });
+    const setCurrentRect = (e: MouseEvent) => dispatch({ type: 'setElement', payload: e.currentTarget });
 
     const isActive = ({ isActive }: { isActive: boolean }) => {
         setActive(isActive);

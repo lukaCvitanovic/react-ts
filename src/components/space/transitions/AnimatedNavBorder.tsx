@@ -1,14 +1,13 @@
 import { RefObject, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { NavTransitionContext } from "@/components/space/transitions/NavTransitionProvider";
+import { NavTransitionContext, initialElement } from "@/components/space/transitions/NavTransitionProvider";
 import { gsap } from 'gsap';
-import { initial } from "lodash";
 
 type AnimatedNavBorderProps = {
     column?: boolean
 };
 
 const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
-    const { state: { navRect, initialNavRect }, dispatch } = useContext(NavTransitionContext);
+    const { state: { navElement, initialNavElement }, dispatch } = useContext(NavTransitionContext);
     const [initialWidth, setInitialWidth] = useState(0);
     const [initialX, setInitialX] = useState(0);
     const [oldXAxis, setOldXAxis] = useState(40);
@@ -20,34 +19,34 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
     const gsapSlidingAnimation = (ref: RefObject<HTMLHRElement>) => {
         const timeline = gsap.timeline({ onComplete: onAnimationEnd });
 
-        const startAnimationWidthDifference = ( oldWidth > navRect.width ? (oldWidth * 1.2) - oldWidth : (navRect.width * 1.2) - oldWidth);
-        const endAnimationWidthDifference = oldWidth + startAnimationWidthDifference - navRect.width;
+        const startAnimationWidthDifference = ( oldWidth > navElement.getBoundingClientRect().width ? (oldWidth * 1.2) - oldWidth : (navElement.getBoundingClientRect().width * 1.2) - oldWidth);
+        const endAnimationWidthDifference = oldWidth + startAnimationWidthDifference - navElement.getBoundingClientRect().width;
 
         const left = () => {
-            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (oldXAxis - navRect.x);
+            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (oldXAxis - navElement.getBoundingClientRect().x);
             const stratingWidthAnimationPercentageString = `${stratingWidthAnimationPercentage*100}%`;
-            const endWidthAnimationPercentage = endAnimationWidthDifference / (oldXAxis - navRect.x);
+            const endWidthAnimationPercentage = endAnimationWidthDifference / (oldXAxis - navElement.getBoundingClientRect().x);
             const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
 
             const keyframes = {
                 [stratingWidthAnimationPercentageString]: { width: startAnimationWidthDifference + oldWidth }, 
-                [endWidthAnimationPercentageStrign]: { x: navRect.x - layoutOffset },
-                "100%": { width: navRect.width },
+                [endWidthAnimationPercentageStrign]: { x: navElement.getBoundingClientRect().x - layoutOffset },
+                "100%": { width: navElement.getBoundingClientRect().width },
                 easeEach: 'none',
                 ease: 'power2.inOut'
             }
             timeline.to(ref.current, { duration: (durationMS / 1000), keyframes, animationFillMode: 'forward' });
         };
         const right = () => {
-            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (navRect.x - oldXAxis);
+            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (navElement.getBoundingClientRect().x - oldXAxis);
             const stratingWidthAnimationPercentageString = `${stratingWidthAnimationPercentage*100}%`;
-            const endWidthAnimationPercentage = endAnimationWidthDifference / (navRect.x - oldXAxis);
+            const endWidthAnimationPercentage = endAnimationWidthDifference / (navElement.getBoundingClientRect().x - oldXAxis);
             const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
 
             const keyframes = {
                 [stratingWidthAnimationPercentageString]: { width: startAnimationWidthDifference + oldWidth, x: oldXAxis - layoutOffset },
                 [endWidthAnimationPercentageStrign]: { width: startAnimationWidthDifference + oldWidth },
-                "100%": { width: navRect.width, x: navRect.x - layoutOffset },
+                "100%": { width: navElement.getBoundingClientRect().width, x: navElement.getBoundingClientRect().x - layoutOffset },
                 easeEach: 'none',
                 ease: 'power2.inOut'
             };
@@ -59,34 +58,34 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
     const gsapColumnSlidingAnimation = (ref: RefObject<HTMLHRElement>) => {
         const timeline = gsap.timeline({ onComplete: onAnimationEnd });
 
-        const startAnimationWidthDifference = ( oldWidth > navRect.height ? (oldWidth * 1.2) - oldWidth : (navRect.height * 1.2) - oldWidth);
-        const endAnimationWidthDifference = oldWidth + startAnimationWidthDifference - navRect.height;
+        const startAnimationWidthDifference = ( oldWidth > navElement.getBoundingClientRect().height ? (oldWidth * 1.2) - oldWidth : (navElement.getBoundingClientRect().height * 1.2) - oldWidth);
+        const endAnimationWidthDifference = oldWidth + startAnimationWidthDifference - navElement.getBoundingClientRect().height;
 
         const left = () => {
-            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (oldXAxis - navRect.y);
+            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (oldXAxis - navElement.getBoundingClientRect().y);
             const stratingWidthAnimationPercentageString = `${stratingWidthAnimationPercentage*100}%`;
-            const endWidthAnimationPercentage = endAnimationWidthDifference / (oldXAxis - navRect.y);
+            const endWidthAnimationPercentage = endAnimationWidthDifference / (oldXAxis - navElement.getBoundingClientRect().y);
             const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
 
             const keyframes = {
                 [stratingWidthAnimationPercentageString]: { height: startAnimationWidthDifference + oldWidth }, 
-                [endWidthAnimationPercentageStrign]: { y: navRect.y - layoutOffset },
-                "100%": { height: navRect.height },
+                [endWidthAnimationPercentageStrign]: { y: navElement.getBoundingClientRect().y - layoutOffset },
+                "100%": { height: navElement.getBoundingClientRect().height },
                 easeEach: 'none',
                 ease: 'power2.inOut'
             }
             timeline.to(ref.current, { duration: (durationMS / 1000), keyframes, animationFillMode: 'forward' });
         };
         const right = () => {
-            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (navRect.y - oldXAxis);
+            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (navElement.getBoundingClientRect().y - oldXAxis);
             const stratingWidthAnimationPercentageString = `${stratingWidthAnimationPercentage*100}%`;
-            const endWidthAnimationPercentage = endAnimationWidthDifference / (navRect.y - oldXAxis);
+            const endWidthAnimationPercentage = endAnimationWidthDifference / (navElement.getBoundingClientRect().y - oldXAxis);
             const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
 
             const keyframes = {
                 [stratingWidthAnimationPercentageString]: { height: startAnimationWidthDifference + oldWidth, y: oldXAxis - layoutOffset },
                 [endWidthAnimationPercentageStrign]: { height: startAnimationWidthDifference + oldWidth },
-                "100%": { height: navRect.height, y: navRect.y - layoutOffset },
+                "100%": { height: navElement.getBoundingClientRect().height, y: navElement.getBoundingClientRect().y - layoutOffset },
                 easeEach: 'none',
                 ease: 'power2.inOut'
             };
@@ -96,14 +95,14 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
     };
 
     const leftRightSliderAnimation = (onLeft: Function, onRight: Function) => {
-        const verdict = (column ? oldXAxis > navRect.y : oldXAxis > navRect.x)
+        const verdict = (column ? oldXAxis > navElement.getBoundingClientRect().y : oldXAxis > navElement.getBoundingClientRect().x)
         if (verdict) onLeft();
         else onRight();
     };
 
     const onAnimationEnd = () => {
-        setOldXAxis((column ? navRect.y : navRect.x));
-        setOldWidht((column ? navRect.height : navRect.width));
+        setOldXAxis((column ? navElement.getBoundingClientRect().y : navElement.getBoundingClientRect().x));
+        setOldWidht((column ? navElement.getBoundingClientRect().height : navElement.getBoundingClientRect().width));
     }
 
     const ref = useRef<HTMLHRElement>(null);
@@ -114,19 +113,21 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
     };
 
     useEffect(() => {
-        setInitialWidth((column ? initialNavRect.height : initialNavRect.width));
-        setOldWidht((column ? initialNavRect.height : initialNavRect.width));
-        setInitialX((column ? initialNavRect.y : initialNavRect.x));
-        setOldXAxis((column ? initialNavRect.y : initialNavRect.x));
+        setInitialWidth((column ? initialNavElement.getBoundingClientRect().height : initialNavElement.getBoundingClientRect().width));
+        setOldWidht((column ? initialNavElement.getBoundingClientRect().height : initialNavElement.getBoundingClientRect().width));
+        setInitialX((column ? initialNavElement.getBoundingClientRect().y : initialNavElement.getBoundingClientRect().x));
+        setOldXAxis((column ? initialNavElement.getBoundingClientRect().y : initialNavElement.getBoundingClientRect().x));
         let offset = 0;
         if (!column) offset = ref.current?.getBoundingClientRect().x || 0;
         return () => {
-            if (!column && !offset) dispatch({ type: 'setRect', payload: new DOMRect() });
+            if (!column && !offset) dispatch({ type: 'setElement', payload: initialElement });
         };
-    }, [initialNavRect.x, initialNavRect.y])
+    }, [initialNavElement.getBoundingClientRect().x, initialNavElement.getBoundingClientRect().y])
     useEffect(() => {
+        // TO Enable animation
         if (initialWidth && initialX) animateSlider();
-    }, [navRect.x, navRect.y]);
+        // console.log(navElement.getBoundingClientRect());
+    }, [navElement.getBoundingClientRect().x, navElement.getBoundingClientRect().y]);
 
     
     useLayoutEffect(() => {
@@ -140,7 +141,7 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
 
     return (
         <hr
-            ref={ref} 
+            ref={ref}
             style={{
                 position: 'absolute',
                 ...topBottom,

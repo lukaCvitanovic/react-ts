@@ -1,24 +1,28 @@
 import { createContext, Dispatch, useReducer, ReactElement } from "react";
 
 type NavTransitionState = {
-    navRect: DOMRect,
-    initialNavRect: DOMRect,
+    navElement: Element,
+    initialNavElement: Element,
     transitionFlag: boolean,
 };
 
 type NavTransitionAction = 
     | { type: 'setContext', payload: NavTransitionState }
     | { type: 'resetContext' }
-    | { type: 'setRect' | 'addRect' | 'setInitialRect', payload: DOMRect };
+    | { type: 'setElement' | 'addElement' | 'setInitialElement', payload: Element };
 
 interface NavTransitionContextInterface {
     state: NavTransitionState,
     dispatch: Dispatch<NavTransitionAction>
 };
 
+const element = document.createElement('div');
+element.id = 'initialElement';
+export const initialElement = element;
+
 const initialState = {
-    navRect: new DOMRect(),
-    initialNavRect: new DOMRect(),
+    navElement: initialElement,
+    initialNavElement: initialElement,
     transitionFlag: false,
 };
 
@@ -30,10 +34,10 @@ const navTransitionReducer = (state: NavTransitionState, action: NavTransitionAc
             return action.payload;
         case 'resetContext':
             return initialState;
-        case 'setRect':
-            return { ...state, navRect: action.payload };
-        case 'setInitialRect':
-            return { ...state, initialNavRect: action.payload };
+        case 'setElement':
+            return { ...state, navElement: action.payload };
+        case 'setInitialElement':
+            return { ...state, initialNavElement: action.payload };
         default:
             throw new Error();
     }
