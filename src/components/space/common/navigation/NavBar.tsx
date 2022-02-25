@@ -33,9 +33,8 @@ export const mainNavigationData: NavButtonProps[] = [
 const NavBar = () => {
     const [columnNav, setColumnNav] = useState(false);
 
-    useEffect(() => {
-        window.addEventListener('resize', () => setColumnNav(window.innerWidth < 768));
-    });
+    useEffect(() => window.addEventListener('resize', () => setColumnNav(window.innerWidth < 768)));
+    useEffect(() => setColumnNav(window.innerWidth < 768), []);
 
     return (
         <div className="h-screen relative overflow-hidden">
