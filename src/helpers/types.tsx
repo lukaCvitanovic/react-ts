@@ -29,3 +29,15 @@ export type AnimatedElementProps = AnimatedAreaProps & {
     initialDimension: number,
     AEPosition: AnimatedElementPosisition,
 };
+
+export type Callback = (...args: any[]) => void | null;
+
+export type PositionDimension = {
+    oldDimenstion: number,
+    oldPosition: number,
+    AADimension: number,
+};
+
+export type LeftRightSliderAnimation = (onLeft: () => void, onRight: () => void) => void;
+
+export type AnimationMethod = (ref: HTMLElement, navElement: HTMLElement, onAnimationComplete: Callback, durationMS: number, positionsAndDimensions: PositionDimension, leftRightSliderAnimation: LeftRightSliderAnimation) => void;
