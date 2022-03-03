@@ -17,7 +17,7 @@ export const defaultdHorizontalAnimation: AnimationMethod = (ref, navElement, on
 
         const keyframes = {
             "0%": { left: AADimension - oldDimenstion },
-            [stratingWidthAnimationPercentageString]: { width: startAnimationWidth, left: AADimension - startAnimationWidth }, 
+            [stratingWidthAnimatkionPercentageString]: { width: startAnimationWidth, left: AADimension - startAnimationWidth }, 
             [endWidthAnimationPercentageStrign]: { left: 0 },
             "100%": { width: navElement.getBoundingClientRect().width },
             easeEach: 'none',
