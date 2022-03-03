@@ -1,5 +1,7 @@
-import { RefObject, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import AnimatedBorder from "@/components/space/transitions/AnimatedBorder";
+import { Ref, RefObject, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { NavTransitionContext, initialElement } from "@/components/space/transitions/NavTransitionProvider";
+import { AnimatedAreaProps, AnimatedElementPosisition, AnimatedElementProps } from "@/helpers/types";
 import { gsap } from 'gsap';
 import omit from "lodash/omit";
 
@@ -10,22 +12,16 @@ enum Direction {
     Right = 'right',
 };
 
-type AnimatedNavBorderProps = {
-    column?: boolean
-};
-
 type AnimatedAreaPosition = 
     | { bottom: 0, left: number | string, right: number | string, column: false }
     | { top: number, right: 0, column: true };
 
-type AnimatedElementPosisition = {
-    top: number | string,
-    bottom: number | string,
-    left: number | string,
-    right: number | string,
+type AnimatedAreaRenderProp = {
+    render?: Function
 };
+const defaultRenderProp = (props: AnimatedElementProps, ref: Ref<HTMLHRElement>) => <AnimatedBorder {...props} ref={ref} />;
 
-const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
+const AnimatedNavBorder = ({ column = false, render = defaultRenderProp }: AnimatedAreaProps & AnimatedAreaRenderProp) => {
     const { state: { navElement, initialNavElement }, dispatch } = useContext(NavTransitionContext);
 
     const [animationFlag, setAnimationFlag] = useState(false);
@@ -37,6 +33,7 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
     const [AADimension, setAADimension] = useState(0);
     const [oldNavElement, setOldNavElement] = useState<Element | null>(null);
 
+    const [defaultCounterDimension, setDefaultCounterDimension] = useState(0);
     const [initialWidth, setInitialWidth] = useState(0);
     const [initialX, setInitialX] = useState(0);
     const [oldXAxis, setOldXAxis] = useState(40);
@@ -273,19 +270,22 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
     useEffect(() => {
         if (!initialNavElement.isEqualNode(initialElement)) AADimensionInitialization();
     }, [initialNavElement]);
+
+    const dependentChildDimesion = (column ? ref.current?.offsetWidth : ref.current?.offsetHeight);
+    useEffect(() => {
+        if (!defaultCounterDimension && dependentChildDimesion !== undefined) setDefaultCounterDimension(dependentChildDimesion);
+    }, [dependentChildDimesion]);
     
     useLayoutEffect(() => {
         let offset = 0;
         setLayoutOffset(offset);
     }, []);
 
-    const margin = (column ? { marginTop: '' } : {});
-
     const toOmit = (column ? ['column', 'left'] : ['column']);
     const style = {
         backgroundColor: 'red',
-        width: `${(column ? 3 : AADimension)}px`,
-        height: `${(column ? AADimension : 3)}px`,
+        width: `${(column ? defaultCounterDimension : AADimension)}px`,
+        height: `${(column ? AADimension : defaultCounterDimension)}px`,
         ...omit(AAPosition, toOmit),
     };
 
@@ -296,21 +296,13 @@ const AnimatedNavBorder = ({ column = false }: AnimatedNavBorderProps) => {
                 ...style,
             }}
         >
-            <hr
+            {/* <AnimatedBorder
+                column={column}
+                initialDimension={initialWidth}
+                AEPosition={AEPosition}
                 ref={ref}
-                style={{
-                    position: 'absolute',
-                    ...margin,
-                    ...AEPosition,
-                    borderTopWidth: `${(column ? 0 : '3px')}`,
-                    borderTopColor: 'white',
-                    borderLeftWidth: `${(column ? '3px' : 0)}`,
-                    borderLeftColor: 'white',
-                    width: `${(column ? 3 : initialWidth)}px`,
-                    height: `${(column ? initialWidth : 3)}px`,
-                    // transform: `translate${column ? 'Y' : 'X'}(${initialX - layoutOffset}px)`
-                }}
-            />
+            /> */}
+            {render({ column, initialDimension: initialWidth, AEPosition }, ref)}
         </div>
     );
 };

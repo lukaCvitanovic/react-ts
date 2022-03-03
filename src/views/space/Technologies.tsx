@@ -1,6 +1,4 @@
 import PageWrapper from "@/components/space/common/PageWrapper";
-import technologyImageLandscape from "@/assets/images/space/technology/image-launch-vehicle-landscape.jpg";
-import technologyImagePortrait from "@/assets/images/space/technology/image-launch-vehicle-portrait.jpg";
 import Navigations from "@/components/space/common/navigation/Navigations";
 import NavTransitionProvider from "@/components/space/transitions/NavTransitionProvider";
 import { NavButtonProps } from "@/components/space/common/navigation/NavButton";
@@ -8,7 +6,11 @@ import data from "@/assets/data/space/data.json";
 import kebabCase from "lodash/kebabCase"
 import { Route } from "react-router-dom";
 import useImportImage from "@/helpers/space/useImportImage";
-import { useState } from "react";
+import { Ref, useState } from "react";
+import useColumnNav from "@/helpers/space/useColumnNav";
+import AnimatedNavBorder from "@/components/space/transitions/AnimatedNavBorder";
+import { AnimatedElementProps } from "@/helpers/types";
+import AnimatedPill from "@/components/space/transitions/AnimatedPill";
 
 const technologiesNavigationData: NavButtonProps[] = [
     {
@@ -44,8 +46,13 @@ const Technology = ({ name, images: { landscape, portrait }, description }: Tech
     const [portraitImage, setPortraitImage] = useState<string>('');
     const [landscapeImage, setLandscapeImage] = useState<string>('');
 
+    const [columnNav, setColumnNav] = useState(false);
+
     useImportImage(portrait, 'technology/', setPortraitImage);
     useImportImage(landscape, 'technology/', setLandscapeImage);
+
+    const negativeColumnSetter = (flag: boolean) => setColumnNav(!flag);
+    useColumnNav(768, negativeColumnSetter);
 
     return (
         <PageWrapper
@@ -70,7 +77,8 @@ const Technology = ({ name, images: { landscape, portrait }, description }: Tech
                     />
                 </div>
                 <NavTransitionProvider>
-                    <nav className="flex justify-center gap-4 mt-2 md:mt-3 lg:col-start-1 lg:row-start-2 lg:flex-col lg:gap-8 lg:justify-start">
+                    <nav className="relative flex justify-center gap-4 mt-2 md:mt-3 lg:col-start-1 lg:row-start-2 lg:flex-col lg:gap-8 lg:justify-start">
+                        <AnimatedNavBorder column={columnNav} render={(props: AnimatedElementProps, ref: Ref<HTMLDivElement>) => <AnimatedPill {...props} ref={ref} />} />
                         <Navigations navigationData={technologiesNavigationData} />
                     </nav>
                 </NavTransitionProvider>

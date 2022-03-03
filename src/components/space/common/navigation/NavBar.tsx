@@ -3,9 +3,12 @@ import Navigations from "@/components/space/common/navigation/Navigations";
 import AnimatedNavBorder from "@/components/space/transitions/AnimatedNavBorder";
 import SpaceLogo from "@/components/space/common/SpaceLogo";
 import SideNavButton from "@/components/space/common/navigation/SideNavButton";
+import AnimatedBorder from "@/components/space/transitions/AnimatedBorder";
+import { AnimatedElementProps } from "@/helpers/types";
 import { NavButtonProps } from "@/components/space/common/navigation/NavButton";
 import { Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Ref, useEffect, useState } from "react";
+import useColumnNav from "@/helpers/space/useColumnNav";
 
 export const mainNavigationData: NavButtonProps[] = [
     {
@@ -33,8 +36,7 @@ export const mainNavigationData: NavButtonProps[] = [
 const NavBar = () => {
     const [columnNav, setColumnNav] = useState(false);
 
-    useEffect(() => window.addEventListener('resize', () => setColumnNav(window.innerWidth < 768)));
-    useEffect(() => setColumnNav(window.innerWidth < 768), []);
+    useColumnNav(768, setColumnNav);
 
     return (
         <div className="h-screen relative overflow-hidden">
@@ -47,7 +49,7 @@ const NavBar = () => {
                     <nav className="hidden md:flex px-12 lg:pl-[7.5rem] md:w-fit lg:w-full shrink lg:max-w-[60%] gap-x-12 text-white backdrop-blur-[5.125rem] bg-white/[.04]">
                         <Navigations navigationData={mainNavigationData} />
                         {!columnNav &&
-                            <AnimatedNavBorder />
+                            <AnimatedNavBorder render={(props: AnimatedElementProps, ref: Ref<HTMLHRElement>) => <AnimatedBorder {...props} ref={ref} />} />
                         }
                     </nav>
                     <div className="md:hidden p-6 h-24 flex items-center justify-center">
