@@ -49,9 +49,8 @@ const NavButton = ({ to, number, title, column = false, small = false, showNumbe
 
     const defaultNumerationClass = 'font-bold mr-3 tracking-[2.7px]';
     const numerationClass = (column ? defaultNumerationClass : `hidden lg:block ${defaultNumerationClass}`);
-    const circleClass = `rounded-full w-full h-full ${(active ? 'bg-white' : 'bg-white/[.17] hover:bg-white/50')}`;
+    const circleClass = 'rounded-full w-full h-full bg-white/[.17] hover:bg-white/50';
     const numberedClass = `rounded-full w-full h-full flex items-center justify-center border border-white/25 hover:border-white z-10 bg-transparent text-white mix-blend-difference`;
-    // ${(active ? 'bg-white text-black' : 'bg-transparent text-white')}
 
     const navContent = () => {
         if (circle) {

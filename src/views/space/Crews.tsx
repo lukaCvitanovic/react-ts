@@ -1,11 +1,14 @@
 import PageWrapper from "@/components/space/common/PageWrapper";
 import NavTransitionProvider from "@/components/space/transitions/NavTransitionProvider";
 import Navigations from "@/components/space/common/navigation/Navigations";
+import AnimatedNavBorder from "@/components/space/transitions/AnimatedNavBorder";
+import { AnimatedElementProps } from "@/helpers/types";
+import AnimatedPill, { horizontalAnimation, verticalAnimation } from "@/components/space/transitions/AnimatedPill";
 import { NavButtonProps } from "@/components/space/common/navigation/NavButton";
 import { Route } from "react-router-dom";
 import data from "@/assets/data/space/data.json";
 import kebabCase from "lodash/kebabCase";
-import { useState } from "react";
+import { Ref, useState } from "react";
 import useImportImage from "@/helpers/space/useImportImage";
 
 const crewsNavigationData: NavButtonProps[] = [
@@ -62,7 +65,13 @@ const Crew = ({ name, images: { png }, role, bio }: CrewProp) => {
                     />
                 </div>
                 <NavTransitionProvider>
-                    <nav className="flex justify-center gap-x-4 lg:mb-24 lg:self-end">
+                    <nav className="relative flex justify-center gap-x-4 lg:mb-24 lg:self-end">
+                        <AnimatedNavBorder
+                            column={false}
+                            verticalAnimation={verticalAnimation}
+                            horizontalAnimation={horizontalAnimation}
+                            render={(props: AnimatedElementProps, ref: Ref<HTMLDivElement>) => <AnimatedPill {...props} ref={ref} />}
+                        />
                         <Navigations navigationData={crewsNavigationData} />
                     </nav>
                 </NavTransitionProvider>

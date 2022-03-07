@@ -187,7 +187,7 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
 
     const dependentChildDimesion = (column ? ref.current?.offsetWidth : ref.current?.offsetHeight);
     useEffect(() => {
-        if (!defaultCounterDimension && dependentChildDimesion !== undefined) setDefaultCounterDimension(dependentChildDimesion);
+        if (dependentChildDimesion !== undefined) setDefaultCounterDimension(dependentChildDimesion);
     }, [dependentChildDimesion]);
     
     useLayoutEffect(() => {
@@ -197,7 +197,7 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
 
     const toOmit = (column ? ['column', 'left'] : ['column']);
     const style = {
-        backgroundColor: 'red',
+        backgroundColor: 'transparent',
         width: `${(column ? defaultCounterDimension : AADimension)}px`,
         height: `${(column ? AADimension : defaultCounterDimension)}px`,
         ...omit(AAPosition, toOmit),
@@ -210,7 +210,7 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
                 ...style,
             }}
         >
-            {render({ column, initialDimension: initialDimension, AEPosition }, ref)}
+            {render({ column, initialDimension, AEPosition }, ref)}
         </div>
     );
 };

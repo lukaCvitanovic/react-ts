@@ -10,7 +10,7 @@ import { Ref, useState } from "react";
 import useColumnNav from "@/helpers/space/useColumnNav";
 import AnimatedNavBorder from "@/components/space/transitions/AnimatedNavBorder";
 import { AnimatedElementProps } from "@/helpers/types";
-import AnimatedPill from "@/components/space/transitions/AnimatedPill";
+import AnimatedPill, { horizontalAnimation, verticalAnimation } from "@/components/space/transitions/AnimatedPill";
 
 const technologiesNavigationData: NavButtonProps[] = [
     {
@@ -52,7 +52,7 @@ const Technology = ({ name, images: { landscape, portrait }, description }: Tech
     useImportImage(landscape, 'technology/', setLandscapeImage);
 
     const negativeColumnSetter = (flag: boolean) => setColumnNav(!flag);
-    useColumnNav(768, negativeColumnSetter);
+    useColumnNav(1024, negativeColumnSetter);
 
     return (
         <PageWrapper
@@ -77,8 +77,13 @@ const Technology = ({ name, images: { landscape, portrait }, description }: Tech
                     />
                 </div>
                 <NavTransitionProvider>
-                    <nav className="relative flex justify-center gap-4 mt-2 md:mt-3 lg:col-start-1 lg:row-start-2 lg:flex-col lg:gap-8 lg:justify-start">
-                        <AnimatedNavBorder column={columnNav} render={(props: AnimatedElementProps, ref: Ref<HTMLDivElement>) => <AnimatedPill {...props} ref={ref} />} />
+                    <nav className="relative flex justify-center gap-4 mt-2 md:mt-3 lg:col-start-1 lg:row-start-2 lg:flex-col lg:gap-8 lg:justify-start lg:h-max">
+                        <AnimatedNavBorder
+                            column={columnNav}
+                            verticalAnimation={verticalAnimation}
+                            horizontalAnimation={horizontalAnimation}
+                            render={(props: AnimatedElementProps, ref: Ref<HTMLDivElement>) => <AnimatedPill {...props} ref={ref} />}
+                        />
                         <Navigations navigationData={technologiesNavigationData} />
                     </nav>
                 </NavTransitionProvider>

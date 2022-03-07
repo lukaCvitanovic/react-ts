@@ -744,6 +744,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 10.5rem;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .w-12 {
   width: 3rem;
 }
@@ -760,20 +764,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 0.5rem;
 }
 
+.w-10 {
+  width: 2.5rem;
+}
+
 .w-5 {
   width: 1.25rem;
 }
 
 .w-6 {
   width: 1.5rem;
-}
-
-.w-screen {
-  width: 100vw;
-}
-
-.w-10 {
-  width: 2.5rem;
 }
 
 .max-w-\[305px\] {
@@ -922,14 +922,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.grid-rows-\[repeat\] {
-  grid-template-rows: repeat;
-}
-
-.grid-rows-\[repeat\(\)\] {
-  grid-template-rows: repeat();
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -958,10 +950,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: space-between;
 }
 
-.justify-items-center {
-  justify-items: center;
-}
-
 .gap-8 {
   gap: 2rem;
 }
@@ -988,6 +976,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   row-gap: 1rem;
 }
 
+.gap-y-6 {
+  row-gap: 1.5rem;
+}
+
 .gap-y-2 {
   row-gap: 0.5rem;
 }
@@ -995,10 +987,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .gap-x-12 {
   -webkit-column-gap: 3rem;
           column-gap: 3rem;
-}
-
-.gap-y-6 {
-  row-gap: 1.5rem;
 }
 
 .overflow-hidden {
@@ -1159,8 +1147,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-image: radial-gradient(circle at top, #1f3756, #141539);
 }
 
-.bg-space-home-desktop {
-  background-image: url('/src/assets/images/space/home/background-home-desktop.jpg');
+.bg-space-crew-mobile {
+  background-image: url('/src/assets/images/space/crew/background-crew-mobile.jpg');
 }
 
 .bg-space-destination-mobile {
@@ -1169,10 +1157,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-space-home-mobile {
   background-image: url('/src/assets/images/space/home/background-home-mobile.jpg');
-}
-
-.bg-space-crew-mobile {
-  background-image: url('/src/assets/images/space/crew/background-crew-mobile.jpg');
 }
 
 .bg-space-technology-mobile {
@@ -1447,6 +1431,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   mix-blend-mode: normal;
 }
 
+.mix-blend-difference {
+  mix-blend-mode: difference;
+}
+
 .outline {
   outline-style: solid;
 }
@@ -1689,14 +1677,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-top: 9.5rem;
   }
 
-  .md\:mt-\[2\.2\] {
-    margin-top: 2.2;
-  }
-
-  .md\:mt-\[2\.25rem\] {
-    margin-top: 2.25rem;
-  }
-
   .md\:mt-3 {
     margin-top: 0.75rem;
   }
@@ -1739,10 +1719,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     height: 18.75rem;
   }
 
-  .md\:h-\[3\.\] {
-    height: 3.;
-  }
-
   .md\:h-\[3\.75rem\] {
     height: 3.75rem;
   }
@@ -1775,10 +1751,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:w-\[18\.75rem\] {
     width: 18.75rem;
-  }
-
-  .md\:w-\[3\.\] {
-    width: 3.;
   }
 
   .md\:w-\[3\.75rem\] {
@@ -1816,10 +1788,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     justify-content: flex-end;
   }
 
-  .md\:justify-center {
-    justify-content: center;
-  }
-
   .md\:justify-between {
     justify-content: space-between;
   }
@@ -1854,16 +1822,16 @@ Ensure the default browser behavior of the `hidden` attribute.
     background-color: rgb(0 0 0 / var(--tw-bg-opacity));
   }
 
+  .md\:bg-space-crew-tablet {
+    background-image: url('/src/assets/images/space/crew/background-crew-tablet.jpg');
+  }
+
   .md\:bg-space-destination-tablet {
     background-image: url('/src/assets/images/space/destination/background-destination-tablet.jpg');
   }
 
   .md\:bg-space-home-tablet {
     background-image: url('/src/assets/images/space/home/background-home-tablet.jpg');
-  }
-
-  .md\:bg-space-crew-tablet {
-    background-image: url('/src/assets/images/space/crew/background-crew-tablet.jpg');
   }
 
   .md\:bg-space-technology-tablet {
@@ -1883,11 +1851,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   .md\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
-  }
-
-  .md\:px-1 {
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
   }
 
   .md\:pb-14 {
@@ -2004,20 +1967,16 @@ Ensure the default browser behavior of the `hidden` attribute.
     grid-column: span 2 / span 2;
   }
 
-  .lg\:col-span-1 {
-    grid-column: span 1 / span 1;
-  }
-
   .lg\:col-start-2 {
     grid-column-start: 2;
   }
 
-  .lg\:col-start-1 {
-    grid-column-start: 1;
-  }
-
   .lg\:col-start-3 {
     grid-column-start: 3;
+  }
+
+  .lg\:col-start-1 {
+    grid-column-start: 1;
   }
 
   .lg\:row-span-3 {
@@ -2038,6 +1997,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:mt-\[3\.5rem\] {
     margin-top: 3.5rem;
+  }
+
+  .lg\:mb-24 {
+    margin-bottom: 6rem;
+  }
+
+  .lg\:mt-28 {
+    margin-top: 7rem;
   }
 
   .lg\:mt-4 {
@@ -2068,76 +2035,28 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-top: 3.375rem;
   }
 
-  .lg\:mt-28 {
-    margin-top: 7rem;
-  }
-
-  .lg\:mb-2 {
-    margin-bottom: 0.5rem;
-  }
-
-  .lg\:mb-24 {
-    margin-bottom: 6rem;
-  }
-
   .lg\:mt-16 {
     margin-top: 4rem;
-  }
-
-  .lg\:mt-0 {
-    margin-top: 0px;
-  }
-
-  .lg\:ml-\[10\.375rem\] {
-    margin-left: 10.375rem;
   }
 
   .lg\:ml-10 {
     margin-left: 2.5rem;
   }
 
-  .lg\:block {
-    display: block;
+  .lg\:mt-0 {
+    margin-top: 0px;
   }
 
-  .lg\:inline-block {
-    display: inline-block;
+  .lg\:block {
+    display: block;
   }
 
   .lg\:flex {
     display: flex;
   }
 
-  .lg\:inline-flex {
-    display: inline-flex;
-  }
-
   .lg\:hidden {
     display: none;
-  }
-
-  .lg\:aspect-auto {
-    aspect-ratio: auto;
-  }
-
-  .lg\:aspect-square {
-    aspect-ratio: 1 / 1;
-  }
-
-  .lg\:aspect-\[\] {
-    aspect-ratio: ;
-  }
-
-  .lg\:aspect-\[515\] {
-    aspect-ratio: 515;
-  }
-
-  .lg\:aspect-\[515\/\] {
-    aspect-ratio: 515 / ;
-  }
-
-  .lg\:aspect-\[515\/527\] {
-    aspect-ratio: 515 / 527;
   }
 
   .lg\:h-\[22\.5rem\] {
@@ -2160,49 +2079,17 @@ Ensure the default browser behavior of the `hidden` attribute.
     height: 28rem;
   }
 
+  .lg\:h-max {
+    height: -webkit-max-content;
+    height: max-content;
+  }
+
   .lg\:h-4 {
     height: 1rem;
   }
 
   .lg\:h-20 {
     height: 5rem;
-  }
-
-  .lg\:h-1\/2 {
-    height: 50%;
-  }
-
-  .lg\:h-\[\] {
-    height: ;
-  }
-
-  .lg\:h-\[75\%\] {
-    height: 75%;
-  }
-
-  .lg\:max-h-full {
-    max-height: 100%;
-  }
-
-  .lg\:max-h-max {
-    max-height: -webkit-max-content;
-    max-height: max-content;
-  }
-
-  .lg\:max-h-\[100\%\] {
-    max-height: 100%;
-  }
-
-  .lg\:max-h-\[44\.5rem\] {
-    max-height: 44.5rem;
-  }
-
-  .lg\:max-h-\[50rem\] {
-    max-height: 50rem;
-  }
-
-  .lg\:max-h-\[60rem\] {
-    max-height: 60rem;
   }
 
   .lg\:w-\[22\.5rem\] {
@@ -2237,24 +2124,16 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 5rem;
   }
 
-  .lg\:min-w-\[\] {
-    min-width: ;
-  }
-
-  .lg\:min-w-\[30rem\] {
-    min-width: 30rem;
-  }
-
-  .lg\:min-w-\[25rem\] {
-    min-width: 25rem;
-  }
-
   .lg\:max-w-5xl {
     max-width: 64rem;
   }
 
-  .lg\:max-w-\[71rem\] {
-    max-width: 71rem;
+  .lg\:max-w-\[60\.5625rem\] {
+    max-width: 60.5625rem;
+  }
+
+  .lg\:max-w-\[25rem\] {
+    max-width: 25rem;
   }
 
   .lg\:max-w-\[30\.5rem\] {
@@ -2273,228 +2152,20 @@ Ensure the default browser behavior of the `hidden` attribute.
     max-width: 28rem;
   }
 
-  .lg\:max-w-\[60\%\] {
-    max-width: 60%;
+  .lg\:max-w-\[70rem\] {
+    max-width: 70rem;
   }
 
   .lg\:max-w-full {
     max-width: 100%;
   }
 
-  .lg\:max-w-max {
-    max-width: -webkit-max-content;
-    max-width: max-content;
-  }
-
-  .lg\:max-w-\[60rem\] {
-    max-width: 60rem;
-  }
-
-  .lg\:max-w-\[30rem\] {
-    max-width: 30rem;
-  }
-
-  .lg\:max-w-\[40rem\] {
-    max-width: 40rem;
-  }
-
-  .lg\:max-w-\[50rem\] {
-    max-width: 50rem;
-  }
-
-  .lg\:max-w-\[42rem\] {
-    max-width: 42rem;
-  }
-
-  .lg\:max-w-\[43rem\] {
-    max-width: 43rem;
-  }
-
-  .lg\:max-w-\[\] {
-    max-width: ;
-  }
-
-  .lg\:max-w-\[78\.5rem\] {
-    max-width: 78.5rem;
-  }
-
-  .lg\:max-w-\[25rem\] {
-    max-width: 25rem;
-  }
-
-  .lg\:max-w-\[60\.5\] {
-    max-width: 60.5;
-  }
-
-  .lg\:max-w-\[60\.5625rem\] {
-    max-width: 60.5625rem;
-  }
-
-  .lg\:max-w-\[20rem\] {
-    max-width: 20rem;
-  }
-
-  .lg\:max-w-\[70rem\] {
-    max-width: 70rem;
-  }
-
-  .lg\:grid-flow-row-dense {
-    grid-auto-flow: row dense;
-  }
-
-  .lg\:grid-cols-\[auto_auto\] {
-    grid-template-columns: auto auto;
-  }
-
-  .lg\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-\[\] {
-    grid-template-columns: ;
-  }
-
-  .lg\:grid-cols-\[mas\] {
-    grid-template-columns: mas;
-  }
-
-  .lg\:grid-cols-\[masonry\] {
-    grid-template-columns: masonry;
-  }
-
-  .lg\:grid-cols-\[repeat\] {
-    grid-template-columns: repeat;
-  }
-
-  .lg\:grid-cols-\[repeat\(\)\] {
-    grid-template-columns: repeat();
-  }
-
-  .lg\:grid-cols-\[30\.5rem\] {
-    grid-template-columns: 30.5rem;
-  }
-
-  .lg\:grid-cols-\[30\.5rem_\] {
-    grid-template-columns: 30.5rem;
-  }
-
-  .lg\:grid-cols-\[30\.5rem_auto\] {
-    grid-template-columns: 30.5rem auto;
-  }
-
-  .lg\:grid-cols-\[30\.5rem_1fr\] {
-    grid-template-columns: 30.5rem 1fr;
+  .lg\:max-w-\[60\%\] {
+    max-width: 60%;
   }
 
   .lg\:grid-cols-\[auto_1fr\] {
     grid-template-columns: auto 1fr;
-  }
-
-  .lg\:grid-cols-\[min\] {
-    grid-template-columns: min;
-  }
-
-  .lg\:grid-cols-\[min-content_fit_cont\] {
-    grid-template-columns: -webkit-min-content fit cont;
-    grid-template-columns: min-content fit cont;
-  }
-
-  .lg\:grid-cols-\[min-content_fit_content\] {
-    grid-template-columns: -webkit-min-content fit content;
-    grid-template-columns: min-content fit content;
-  }
-
-  .lg\:grid-cols-\[min-content_fit_content_\] {
-    grid-template-columns: -webkit-min-content fit content;
-    grid-template-columns: min-content fit content;
-  }
-
-  .lg\:grid-cols-\[min-content_fit_content_1fr\] {
-    grid-template-columns: -webkit-min-content fit content 1fr;
-    grid-template-columns: min-content fit content 1fr;
-  }
-
-  .lg\:grid-cols-\[min-content_min_content_1fr\] {
-    grid-template-columns: -webkit-min-content min content 1fr;
-    grid-template-columns: min-content min content 1fr;
-  }
-
-  .lg\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-\[min-content\] {
-    grid-template-columns: -webkit-min-content;
-    grid-template-columns: min-content;
-  }
-
-  .lg\:grid-cols-\[min-content_fit-content\] {
-    grid-template-columns: -webkit-min-content -webkit-fit-content;
-    grid-template-columns: min-content fit-content;
-  }
-
-  .lg\:grid-cols-\[min-content_fit-content_\] {
-    grid-template-columns: -webkit-min-content -webkit-fit-content;
-    grid-template-columns: min-content fit-content;
-  }
-
-  .lg\:grid-cols-\[min-content_fit-content_1fr\] {
-    grid-template-columns: -webkit-min-content -webkit-fit-content 1fr;
-    grid-template-columns: min-content fit-content 1fr;
-  }
-
-  .lg\:grid-cols-\[min-content_min-content_1fr\] {
-    grid-template-columns: -webkit-min-content -webkit-min-content 1fr;
-    grid-template-columns: min-content min-content 1fr;
-  }
-
-  .lg\:grid-cols-\[min-content_min-content_aurto\] {
-    grid-template-columns: -webkit-min-content -webkit-min-content aurto;
-    grid-template-columns: min-content min-content aurto;
-  }
-
-  .lg\:grid-cols-\[min-content_min-content_auto\] {
-    grid-template-columns: -webkit-min-content -webkit-min-content auto;
-    grid-template-columns: min-content min-content auto;
-  }
-
-  .lg\:grid-cols-\[min-content_min-content_32rem\] {
-    grid-template-columns: -webkit-min-content -webkit-min-content 32rem;
-    grid-template-columns: min-content min-content 32rem;
-  }
-
-  .lg\:grid-cols-\[min-content_auto_32rem\] {
-    grid-template-columns: -webkit-min-content auto 32rem;
-    grid-template-columns: min-content auto 32rem;
-  }
-
-  .lg\:grid-cols-\[min-content_auto_40rem\] {
-    grid-template-columns: -webkit-min-content auto 40rem;
-    grid-template-columns: min-content auto 40rem;
-  }
-
-  .lg\:grid-cols-\[min-content_30rem_40rem\] {
-    grid-template-columns: -webkit-min-content 30rem 40rem;
-    grid-template-columns: min-content 30rem 40rem;
-  }
-
-  .lg\:grid-cols-\[min-content_30rem_\] {
-    grid-template-columns: -webkit-min-content 30rem;
-    grid-template-columns: min-content 30rem;
-  }
-
-  .lg\:grid-cols-\[min-content_30rem_auto\] {
-    grid-template-columns: -webkit-min-content 30rem auto;
-    grid-template-columns: min-content 30rem auto;
-  }
-
-  .lg\:grid-cols-\[min-content_30rem_25rem\] {
-    grid-template-columns: -webkit-min-content 30rem 25rem;
-    grid-template-columns: min-content 30rem 25rem;
-  }
-
-  .lg\:grid-cols-\[min-_25rem\] {
-    grid-template-columns: min- 25rem;
   }
 
   .lg\:grid-cols-\[min-content_auto_25rem\] {
@@ -2502,97 +2173,14 @@ Ensure the default browser behavior of the `hidden` attribute.
     grid-template-columns: min-content auto 25rem;
   }
 
-  .lg\:grid-rows-\[min-content\] {
-    grid-template-rows: -webkit-min-content;
-    grid-template-rows: min-content;
-  }
-
-  .lg\:grid-rows-\[maso\] {
-    grid-template-rows: maso;
-  }
-
-  .lg\:grid-rows-\[masonry_\] {
-    grid-template-rows: masonry;
-  }
-
-  .lg\:grid-rows-\[masonry\] {
-    grid-template-rows: masonry;
-  }
-
-  .lg\:grid-rows-\[\] {
-    grid-template-rows: ;
-  }
-
-  .lg\:grid-rows-\[repeat\] {
-    grid-template-rows: repeat;
-  }
-
-  .lg\:grid-rows-\[ma\] {
-    grid-template-rows: ma;
-  }
-
-  .lg\:grid-rows-\[masonry_masonry\] {
-    grid-template-rows: masonry masonry;
-  }
-
-  .lg\:grid-rows-\[min_min_min\] {
-    grid-template-rows: min min min;
-  }
-
-  .lg\:grid-rows-\[min_m\] {
-    grid-template-rows: min m;
-  }
-
-  .lg\:grid-rows-\[min-content_min-content_auto\] {
-    grid-template-rows: -webkit-min-content -webkit-min-content auto;
-    grid-template-rows: min-content min-content auto;
-  }
-
-  .lg\:grid-rows-\[fit-content_min-content_auto\] {
-    grid-template-rows: -webkit-fit-content -webkit-min-content auto;
-    grid-template-rows: fit-content min-content auto;
-  }
-
   .lg\:grid-rows-\[min-content_min-content_1fr\] {
     grid-template-rows: -webkit-min-content -webkit-min-content 1fr;
     grid-template-rows: min-content min-content 1fr;
   }
 
-  .lg\:grid-rows-\[min-content_\] {
-    grid-template-rows: -webkit-min-content;
-    grid-template-rows: min-content;
-  }
-
   .lg\:grid-rows-\[min-content_1fr\] {
     grid-template-rows: -webkit-min-content 1fr;
     grid-template-rows: min-content 1fr;
-  }
-
-  .lg\:grid-rows-2 {
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-  }
-
-  .lg\:grid-rows-\[min-content_32\] {
-    grid-template-rows: -webkit-min-content 32;
-    grid-template-rows: min-content 32;
-  }
-
-  .lg\:grid-rows-\[min-content_32rem\] {
-    grid-template-rows: -webkit-min-content 32rem;
-    grid-template-rows: min-content 32rem;
-  }
-
-  .lg\:grid-rows-\[min-cont_32rem\] {
-    grid-template-rows: min-cont 32rem;
-  }
-
-  .lg\:grid-rows-\[auto_32rem\] {
-    grid-template-rows: auto 32rem;
-  }
-
-  .lg\:grid-rows-\[max-content_32rem\] {
-    grid-template-rows: -webkit-max-content 32rem;
-    grid-template-rows: max-content 32rem;
   }
 
   .lg\:flex-row {
@@ -2605,10 +2193,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:items-start {
     align-items: flex-start;
-  }
-
-  .lg\:items-center {
-    align-items: center;
   }
 
   .lg\:justify-start {
@@ -2631,10 +2215,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     justify-items: start;
   }
 
-  .lg\:gap-20 {
-    gap: 5rem;
-  }
-
   .lg\:gap-8 {
     gap: 2rem;
   }
@@ -2642,10 +2222,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   .lg\:gap-x-20 {
     -webkit-column-gap: 5rem;
             column-gap: 5rem;
-  }
-
-  .lg\:gap-y-\[\] {
-    row-gap: ;
   }
 
   .lg\:gap-y-\[8\.5rem\] {
@@ -2660,16 +2236,12 @@ Ensure the default browser behavior of the `hidden` attribute.
     align-self: flex-end;
   }
 
-  .lg\:self-center {
-    align-self: center;
+  .lg\:bg-space-crew-desktop {
+    background-image: url('/src/assets/images/space/crew/background-crew-desktop.jpg');
   }
 
   .lg\:bg-space-home-desktop {
     background-image: url('/src/assets/images/space/home/background-home-desktop.jpg');
-  }
-
-  .lg\:bg-space-crew-desktop {
-    background-image: url('/src/assets/images/space/crew/background-crew-desktop.jpg');
   }
 
   .lg\:bg-space-technology-desktop {
@@ -2685,21 +2257,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     padding-right: 7.8125rem;
   }
 
-  .lg\:px-\[10\.5rem\] {
-    padding-left: 10.5rem;
-    padding-right: 10.5rem;
-  }
-
-  .lg\:px-\[\] {
-    padding-left: ;
-    padding-right: ;
-  }
-
-  .lg\:px-\[7\.5rem\] {
-    padding-left: 7.5rem;
-    padding-right: 7.5rem;
-  }
-
   .lg\:px-0 {
     padding-left: 0px;
     padding-right: 0px;
@@ -2713,52 +2270,16 @@ Ensure the default browser behavior of the `hidden` attribute.
     padding-bottom: 7rem;
   }
 
+  .lg\:pt-\[3\.5rem\] {
+    padding-top: 3.5rem;
+  }
+
   .lg\:pl-\[3\.375rem\] {
     padding-left: 3.375rem;
   }
 
   .lg\:pl-\[7\.5rem\] {
     padding-left: 7.5rem;
-  }
-
-  .lg\:pt-\[\] {
-    padding-top: ;
-  }
-
-  .lg\:pt-\[3\.75rem\] {
-    padding-top: 3.75rem;
-  }
-
-  .lg\:pl-\[\] {
-    padding-left: ;
-  }
-
-  .lg\:pl-48 {
-    padding-left: 12rem;
-  }
-
-  .lg\:pl-12 {
-    padding-left: 3rem;
-  }
-
-  .lg\:pl-\[10\.\] {
-    padding-left: 10.;
-  }
-
-  .lg\:pl-\[10\.3\] {
-    padding-left: 10.3;
-  }
-
-  .lg\:pl-\[10\.375rem\] {
-    padding-left: 10.375rem;
-  }
-
-  .lg\:pt-3 {
-    padding-top: 0.75rem;
-  }
-
-  .lg\:pt-\[3\.5rem\] {
-    padding-top: 3.5rem;
   }
 
   .lg\:text-left {
@@ -2788,24 +2309,20 @@ Ensure the default browser behavior of the `hidden` attribute.
     min-width: 25rem;
   }
 
-  .xl\:max-w-\[43rem\] {
-    max-width: 43rem;
-  }
-
   .xl\:max-w-\[78\.5rem\] {
     max-width: 78.5rem;
   }
 
-  .xl\:max-w-\[\] {
-    max-width: ;
-  }
-
-  .xl\:max-w-\[45rem\] {
-    max-width: 45rem;
+  .xl\:max-w-\[43rem\] {
+    max-width: 43rem;
   }
 
   .xl\:max-w-full {
     max-width: 100%;
+  }
+
+  .xl\:max-w-\[45rem\] {
+    max-width: 45rem;
   }
 
   .xl\:grid-cols-\[min-content_30rem_auto\] {
