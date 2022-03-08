@@ -1,7 +1,7 @@
 import close from '@/assets/images/space/shared/icon-close.svg';
 import { MouseEventHandler, forwardRef, LegacyRef } from 'react';
 import Navigations from '@/components/space/common/navigation/Navigations';
-import AnimatedNavBorder from "@/components/space/transitions/AnimatedNavBorder";
+import AnimatedSlider from "@/components/space/transitions/AnimatedSlider";
 import { BaseProps } from '@/helpers/types';
 import { mainNavigationData } from '@/components/space/common/navigation/NavBar';
 
@@ -30,7 +30,7 @@ const SideNav = ({ onClose }: SideNavProps & BaseProps, ref: LegacyRef<HTMLDivEl
                     column
                     navigationData={mainNavigationData}
                 />
-                <AnimatedNavBorder column />
+                <AnimatedSlider column />
             </nav>
         </aside>
     );

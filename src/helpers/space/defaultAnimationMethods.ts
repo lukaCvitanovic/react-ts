@@ -1,5 +1,5 @@
 import { gsap } from 'gsap';
-import { AnimationMethod } from '@/helpers/types';
+import { AnimationMethod, ResizeHandeler } from '@/helpers/types';
 
 export const defaultdHorizontalAnimation: AnimationMethod = (ref, navElement, onAnimationComplete, durationMS, { oldDimenstion, oldPosition, AADimension }, leftRightSliderAnimation) => {
     const timeline = gsap.timeline({ onComplete: onAnimationComplete });
@@ -14,7 +14,6 @@ export const defaultdHorizontalAnimation: AnimationMethod = (ref, navElement, on
         const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
 
         const startAnimationWidth = startAnimationWidthDifference + oldDimenstion;
-
         const keyframes = {
             "0%": { left: AADimension - oldDimenstion },
             [stratingWidthAnimatkionPercentageString]: { width: startAnimationWidth, left: AADimension - startAnimationWidth }, 
@@ -90,4 +89,16 @@ export const defaultVerticalAnimation: AnimationMethod = (ref, navElement, onAnm
             timeline.to(ref, { duration: durationMS / 1000, keyframes, animationFillMode: 'forward' });
         };
         leftRightSliderAnimation(up, down);
+};
+
+export const defaultResizeHandeler: ResizeHandeler = (column, { setAADimension, setAAPosition, setDefaultCounterDimension }, referenceElement) => {
+    if (column) {
+        setAADimension(referenceElement.offsetHeight);
+        setDefaultCounterDimension(referenceElement.offsetHeight);
+        setAAPosition((currentPosition) => ({ ...currentPosition, top: referenceElement.offsetTop }));
+    } else {
+        setAADimension(referenceElement.offsetWidth);
+        setDefaultCounterDimension(referenceElement.offsetWidth);
+        setAAPosition((currentPosition) => ({ ...currentPosition, left: referenceElement.offsetLeft }));
+    }
 };

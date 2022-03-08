@@ -1,6 +1,5 @@
-import { ReactElement } from "react";
+import { ReactElement, SetStateAction } from "react";
 import { UserChoice } from "@/components/RPS/Choices";
-import { boolean } from "mathjs";
 
 export type BaseProps = Readonly<{
     className?: string,
@@ -25,6 +24,10 @@ export type AnimatedAreaProps = {
     column?: boolean,
 };
 
+export type AnimatedAreaPosition = 
+    | { bottom: 0, left: number | string, right: number | string, column: false }
+    | { top: number, right: 0, column: true };
+
 export type AnimatedElementProps = AnimatedAreaProps & {
     initialDimension: number,
     AEPosition: AnimatedElementPosisition,
@@ -41,3 +44,11 @@ export type PositionDimension = {
 export type LeftRightSliderAnimation = (onLeft: () => void, onRight: () => void) => void;
 
 export type AnimationMethod = (ref: HTMLElement, navElement: HTMLElement, onAnimationComplete: Callback, durationMS: number, positionsAndDimensions: PositionDimension, leftRightSliderAnimation: LeftRightSliderAnimation) => void;
+
+export type ResizeHandelerSetters = {
+    setAADimension: (value: SetStateAction<number>) => void,
+    setDefaultCounterDimension: (value: SetStateAction<number>) => void,
+    setAAPosition: (value: SetStateAction<AnimatedAreaPosition>) => void,
+};
+
+export type ResizeHandeler = (column: boolean, setters: ResizeHandelerSetters, referenceElement: HTMLElement) => void;

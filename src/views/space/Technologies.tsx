@@ -8,9 +8,9 @@ import { Route } from "react-router-dom";
 import useImportImage from "@/helpers/space/useImportImage";
 import { Ref, useState } from "react";
 import useColumnNav from "@/helpers/space/useColumnNav";
-import AnimatedNavBorder from "@/components/space/transitions/AnimatedNavBorder";
+import AnimatedSlider from "@/components/space/transitions/AnimatedSlider";
 import { AnimatedElementProps } from "@/helpers/types";
-import AnimatedPill, { horizontalAnimation, verticalAnimation } from "@/components/space/transitions/AnimatedPill";
+import AnimatedPill, { horizontalAnimation, verticalAnimation, resizeHandeler } from "@/components/space/transitions/AnimatedPill";
 
 const technologiesNavigationData: NavButtonProps[] = [
     {
@@ -78,10 +78,11 @@ const Technology = ({ name, images: { landscape, portrait }, description }: Tech
                 </div>
                 <NavTransitionProvider>
                     <nav className="relative flex justify-center gap-4 mt-2 md:mt-3 lg:col-start-1 lg:row-start-2 lg:flex-col lg:gap-8 lg:justify-start lg:h-max">
-                        <AnimatedNavBorder
+                        <AnimatedSlider
                             column={columnNav}
                             verticalAnimation={verticalAnimation}
                             horizontalAnimation={horizontalAnimation}
+                            resizeHandeler={resizeHandeler}
                             render={(props: AnimatedElementProps, ref: Ref<HTMLDivElement>) => <AnimatedPill {...props} ref={ref} />}
                         />
                         <Navigations navigationData={technologiesNavigationData} />

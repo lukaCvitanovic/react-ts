@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useState, Ref, RefObject } from "react";
-import { AnimatedElementProps, AnimationMethod } from "@/helpers/types";
+import { AnimatedElementProps, AnimationMethod, ResizeHandeler } from "@/helpers/types";
 import { gsap } from 'gsap';
 
 // Animation methods
@@ -59,10 +59,25 @@ export const verticalAnimation: AnimationMethod = (ref, navElement, onAnimationC
     leftRightSliderAnimation(up, down);
 };
 
+export const resizeHandeler: ResizeHandeler = (column, { setAADimension, setAAPosition, setDefaultCounterDimension }, referenceElement) => {
+    if (column) {
+        setAADimension(referenceElement.offsetWidth);
+        setDefaultCounterDimension(referenceElement.offsetWidth);
+        setAAPosition((currentPosition) => ({ ...currentPosition, top: referenceElement.offsetTop }));
+    } else {
+        setAADimension(referenceElement.offsetHeight);
+        setDefaultCounterDimension(referenceElement.offsetHeight);
+        setAAPosition((currentPosition) => ({ ...currentPosition, left: referenceElement.offsetLeft }));
+    }  
+};
+
 const AnimatedPill = ({ column = false, initialDimension, AEPosition }: AnimatedElementProps, ref: Ref<HTMLDivElement>) => {
     const defaultCounterDimension = 40;
     const [counterDimension, setCounterDimension] = useState(defaultCounterDimension);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [mainDimension, setMainDimension] = useState(initialDimension);
 
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
     const { current } = ref as RefObject<HTMLDivElement>;
     useEffect(() => {
         if (ref !== null) {
@@ -71,6 +86,21 @@ const AnimatedPill = ({ column = false, initialDimension, AEPosition }: Animated
             setCounterDimension(navElementDimension || defaultCounterDimension);
         } else setCounterDimension(defaultCounterDimension);
     }, [current]);
+    // To enable addapting to AA dimension during window resize
+    useEffect(() => {
+        if (ref !== null) {
+            const navElement = current?.parentElement;
+            const dimension = (column ? navElement?.offsetWidth : navElement?.offsetHeight);
+            setCounterDimension(dimension || defaultCounterDimension);
+        }
+    }, [windowWidth]);
+    useEffect(() => {
+        if (ref !== null) {
+            const navElement = current?.parentElement;
+            const dimension = (column ? navElement?.offsetHeight : navElement?.offsetWidth);
+            setMainDimension(dimension || initialDimension);
+        }
+    }, [windowWidth, initialDimension]);
 
     return (
         <div
@@ -80,8 +110,8 @@ const AnimatedPill = ({ column = false, initialDimension, AEPosition }: Animated
                 ...AEPosition,
                 backgroundColor: 'white',
                 borderRadius: `${counterDimension / 2}px`,
-                width: `${(column ? counterDimension : initialDimension)}px`,
-                height: `${(column ? initialDimension : counterDimension)}px`,
+                width: `${(column ? counterDimension : mainDimension)}px`,
+                height: `${(column ? mainDimension : counterDimension)}px`,
             }}
         >
         </div>

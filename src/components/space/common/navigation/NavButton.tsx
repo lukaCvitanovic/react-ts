@@ -37,7 +37,7 @@ const NavButton = ({ to, number, title, column = false, small = false, showNumbe
         setActive(isActive);
         if (circle) return 'h-2.5 w-2.5 lg:h-4 lg:w-4';
         else if (numbered) return 'h-10 w-10 md:h-[3.75rem] md:w-[3.75rem] lg:h-20 lg:w-20';
-        const smallClass = (small ? `h-10 text-sm md:text-base ${(isActive ? 'text-white' : 'text-heading-color')}` : 'h-24');
+        const smallClass = (small ? 'h-10 text-sm md:text-base text-heading-color' : 'h-24');
         const defaultClass = 'w-max flex items-center border-white/0 hover:border-white/50';
         return (column ? `h-8 px-8 w-full border-r-[3px] ${defaultClass} justify-start` : `${smallClass} border-b-[3px] ${defaultClass} justify-center`);
     };

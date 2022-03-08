@@ -1,8 +1,8 @@
 import AnimatedBorder from "@/components/space/transitions/AnimatedBorder";
 import { Ref, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { NavTransitionContext, initialElement } from "@/components/space/transitions/NavTransitionProvider";
-import { AnimatedAreaProps, AnimatedElementPosisition, AnimatedElementProps, LeftRightSliderAnimation, AnimationMethod } from "@/helpers/types";
-import { defaultdHorizontalAnimation, defaultVerticalAnimation } from "@/helpers/space/defaultAnimationMethods";
+import { AnimatedAreaProps, AnimatedElementPosisition, AnimatedElementProps, LeftRightSliderAnimation, AnimationMethod, AnimatedAreaPosition, ResizeHandeler } from "@/helpers/types";
+import { defaultdHorizontalAnimation, defaultResizeHandeler, defaultVerticalAnimation } from "@/helpers/space/defaultAnimationMethods";
 
 import omit from "lodash/omit";
 
@@ -13,18 +13,17 @@ enum Direction {
     Right = 'right',
 };
 
-type AnimatedAreaPosition = 
-    | { bottom: 0, left: number | string, right: number | string, column: false }
-    | { top: number, right: 0, column: true };
+
 
 type AnimatedAreaRenderProp = {
     render?: Function,
     horizontalAnimation?: AnimationMethod,
     verticalAnimation?: AnimationMethod,
+    resizeHandeler?: ResizeHandeler,
 };
 const defaultRenderProp = (props: AnimatedElementProps, ref: Ref<HTMLHRElement>) => <AnimatedBorder {...props} ref={ref} />;
 
-const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVerticalAnimation, horizontalAnimation = defaultdHorizontalAnimation, render = defaultRenderProp }: AnimatedAreaProps & AnimatedAreaRenderProp) => {
+const AnimatedSlider = ({ column = false, verticalAnimation = defaultVerticalAnimation, horizontalAnimation = defaultdHorizontalAnimation, resizeHandeler = defaultResizeHandeler, render = defaultRenderProp }: AnimatedAreaProps & AnimatedAreaRenderProp) => {
     const { state: { navElement, initialNavElement }, dispatch } = useContext(NavTransitionContext);
 
     const [animationFlag, setAnimationFlag] = useState(false);
@@ -42,7 +41,7 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
     const [oldPosition, setOldPosition] = useState(40);
     const [oldDimenstion, setOldDimenstion] = useState(0);
 
-    const [layoutOffset, setLayoutOffset] = useState(0);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     
     const durationMS = 700;
 
@@ -54,7 +53,7 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
         let widthExpansion;
         const moveToRight = () => {
             widthExpansion = navFromRight - oldFromRight;
-            setAADimension(oldDimenstion + widthExpansion);
+            setAADimension((oldNavElement as HTMLElement).offsetWidth + widthExpansion);
         };
         const moveToLeft = () => {
             widthExpansion = oldFromRight - navFromRight;
@@ -142,7 +141,9 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
     };
 
     const leftRightSliderAnimation: LeftRightSliderAnimation = (onLeft, onRight) => {
-        const verdict = (column ? oldPosition > navElement.getBoundingClientRect().y : oldPosition > navElement.getBoundingClientRect().x)
+        const position = (column ? oldNavElement?.getBoundingClientRect().y : oldNavElement?.getBoundingClientRect().x);
+        const referentPosition = position || oldPosition;
+        const verdict = (column ? referentPosition > navElement.getBoundingClientRect().y : oldPosition > navElement.getBoundingClientRect().x)
         if (verdict) onLeft();
         else onRight();
     };
@@ -158,8 +159,10 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
 
     const animateSlider = () => {
         if (ref.current !== null) {
-            if (column) verticalAnimation(ref.current, (navElement as HTMLElement), onAnimationEnd, durationMS, { oldDimenstion, oldPosition, AADimension }, leftRightSliderAnimation);
-            else horizontalAnimation(ref.current, (navElement as HTMLElement), onAnimationEnd, durationMS, { oldDimenstion, oldPosition, AADimension }, leftRightSliderAnimation);
+            const dimension = (column ? oldNavElement?.getBoundingClientRect().height : oldNavElement?.getBoundingClientRect().width);
+            const position = (column ? oldNavElement?.getBoundingClientRect().y : oldNavElement?.getBoundingClientRect().x);
+            if (column) verticalAnimation(ref.current, (navElement as HTMLElement), onAnimationEnd, durationMS, { oldDimenstion: dimension || oldDimenstion, oldPosition: position || oldPosition, AADimension }, leftRightSliderAnimation);
+            else horizontalAnimation(ref.current, (navElement as HTMLElement), onAnimationEnd, durationMS, { oldDimenstion: dimension || oldDimenstion, oldPosition: position || oldPosition, AADimension }, leftRightSliderAnimation);
         }
     };
 
@@ -174,11 +177,30 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
             if (!column && !offset && !navElement.isEqualNode(initialElement)) dispatch({ type: 'setElement', payload: initialElement });
         };
     }, [initialNavElement.getBoundingClientRect().x, initialNavElement.getBoundingClientRect().y])
+    // To enable elements position and dimensions being tracked while whidow width changes
     useEffect(() => {
-        if (oldNavElement !== null) transitionAnimationArea();
+        if (oldNavElement !== null) {
+            const dimension = (column ? oldNavElement.getBoundingClientRect().height : oldNavElement.getBoundingClientRect().width);
+            const position = (column ? oldNavElement.getBoundingClientRect().y : oldNavElement.getBoundingClientRect().x);
+            setOldPosition(position);
+            setOldDimenstion(dimension);
+        }
+    }, [windowWidth]);
+    // To enable AA morphing
+    useEffect(() => {
+        if (oldNavElement !== null) {
+            console.log('animation');
+            transitionAnimationArea();
+        }
     }, [navElement.getBoundingClientRect().x, navElement.getBoundingClientRect().y]);
+    // To enable the AA to addapt to navElement or initialNavElement during window resizing
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
     useEffect(() => {
-        // TO Enable animation
+        const referenceElement = (navElement.isEqualNode(initialElement) ? initialNavElement : navElement) as HTMLElement;
+        resizeHandeler(column, { setAADimension, setAAPosition, setDefaultCounterDimension }, referenceElement);
+    }, [windowWidth]);
+    // To Enable animation
+    useEffect(() => {
         if (initialDimension && initialPosition && animationFlag && checkOpositeDirectionChange()) animateSlider();
     }, [animationFlag, AEPosition]);
     useEffect(() => {
@@ -189,11 +211,7 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
     useEffect(() => {
         if (dependentChildDimesion !== undefined) setDefaultCounterDimension(dependentChildDimesion);
     }, [dependentChildDimesion]);
-    
-    useLayoutEffect(() => {
-        let offset = 0;
-        setLayoutOffset(offset);
-    }, []);
+
 
     const toOmit = (column ? ['column', 'left'] : ['column']);
     const style = {
@@ -215,4 +233,4 @@ const AnimatedNavBorder = ({ column = false, verticalAnimation = defaultVertical
     );
 };
 
-export default AnimatedNavBorder;
+export default AnimatedSlider;

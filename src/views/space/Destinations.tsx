@@ -4,8 +4,11 @@ import Navigations from "@/components/space/common/navigation/Navigations";
 import { NavButtonProps } from "@/components/space/common/navigation/NavButton";
 import { Route } from "react-router-dom";
 import data from "@/assets/data/space/data.json";
-import { useState } from "react";
+import { Ref, useState } from "react";
 import useImportImage from "@/helpers/space/useImportImage";
+import AnimatedSlider from "@/components/space/transitions/AnimatedSlider";
+import { AnimatedElementProps } from "@/helpers/types";
+import AnimatedBorder from "@/components/space/transitions/AnimatedBorder";
 
 const destiantionsNavigationData: NavButtonProps[] = [
     {
@@ -67,8 +70,12 @@ const Destination = ({ name, images: { png }, description, distance, travel }: D
                 </div>
                 <div className="flex flex-col items-center mt-4 md:mt-10 md:px-14 md:pb-14 lg:p-0 lg:w-full lg:max-w-[28rem] lg:items-start lg:mt-20">
                     <NavTransitionProvider>
-                        <nav className="flex gap-x-6 md:gap-x-9">
+                        <nav className="relative flex gap-x-6 md:gap-x-9">
                             <Navigations navigationData={destiantionsNavigationData} />
+                            <AnimatedSlider
+                                column={false}
+                                render={(props: AnimatedElementProps, ref: Ref<HTMLHRElement>) => <AnimatedBorder {...props} ref={ref} />}
+                            />
                         </nav>
                     </NavTransitionProvider>
                     <h3 className="space-heading3 mt-5 md:text-[5rem] md:mt-8 lg:space-heading2">{name}</h3>
