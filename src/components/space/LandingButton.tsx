@@ -1,14 +1,17 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { MouseEventHandler, useState } from "react";
 
-const LandingPageButton = () => {
+type LandingPageButtonProps = {
+    onClick: MouseEventHandler
+};
+
+const LandingPageButton = ({ onClick }: LandingPageButtonProps) => {
     const [hover, setHover] = useState(false);
 
     const hoverOutlineClass = `absolute ${(hover ? 'block' : 'hidden')} inset-0 h-[9.375rem] w-[9.375rem] md:h-[15rem] md:w-[15rem] lg:h-[17rem] lg:w-[17rem] scale-[167%] rounded-full bg-blend-normal bg-white/10`;
 
     return (
-        <Link
-            to="/space/destinations"
+        <button
+            onClick={onClick}
         >
             <div 
                 onMouseEnter={() => setHover(true)}
@@ -18,7 +21,7 @@ const LandingPageButton = () => {
                 <h4 className="text-xl uppercase tracking-[1.25px] font-[Bellefair] md:space-heading4 text-black">Explore</h4>
                 <div className={hoverOutlineClass}></div>
             </div>
-        </Link>
+        </button>
     );
 };
 

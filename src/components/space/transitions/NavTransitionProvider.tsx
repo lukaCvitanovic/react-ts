@@ -1,4 +1,5 @@
-import { createContext, Dispatch, useReducer, ReactElement } from "react";
+import { ProviderChildren } from "@/helpers/types";
+import { createContext, Dispatch, useReducer } from "react";
 
 type NavTransitionState = {
     navElement: Element,
@@ -43,7 +44,7 @@ const navTransitionReducer = (state: NavTransitionState, action: NavTransitionAc
     }
 };
 
-const NavTransitionProvider = ({ children }: { children: ReactElement | string | JSX.Element[] | Element[]}) => {
+const NavTransitionProvider = ({ children }: { children: ProviderChildren}) => {
     const [state, dispatch] = useReducer(navTransitionReducer, initialState);
 
     return (

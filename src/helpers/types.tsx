@@ -7,6 +7,8 @@ export type BaseProps = Readonly<{
     name?: string,
 }>;
 
+export type ProviderChildren = ReactElement | string | JSX.Element[] | Element[];
+
 export type NonCalcGameStats = {
     win: boolean,
     userChoice: UserChoice,

@@ -188,10 +188,7 @@ const AnimatedSlider = ({ column = false, verticalAnimation = defaultVerticalAni
     }, [windowWidth]);
     // To enable AA morphing
     useEffect(() => {
-        if (oldNavElement !== null) {
-            console.log('animation');
-            transitionAnimationArea();
-        }
+        if (oldNavElement !== null) transitionAnimationArea();
     }, [navElement.getBoundingClientRect().x, navElement.getBoundingClientRect().y]);
     // To enable the AA to addapt to navElement or initialNavElement during window resizing
     window.addEventListener('resize', () => setWindowWidth(window.innerWidth));

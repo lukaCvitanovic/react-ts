@@ -1,7 +1,32 @@
 import PageWrapper from "@/components/space/common/PageWrapper";
+import { ExplorationContext } from "@/components/space/ExplorationProvider";
 import LandingPageButton from "@/components/space/LandingButton";
+import { useContext, useEffect } from "react";
+
+const spaceRoutes = [
+    'destinations/moon',
+    'destinations/mars',
+    'destinations/europa',
+    'destinations/titan',
+    'crews/douglas-hurley',
+    'crews/mark-shuttleworth',
+    'crews/victor-glover',
+    'crews/anousheh-ansari',
+    'technologies/launch-vehicle',
+    'technologies/spaceport',
+    'technologies/space-capsule',
+    'home',
+  ];
 
 const SpaceLanding = () => {
+    const { state: { routes }, dispatch } = useContext(ExplorationContext);
+
+    useEffect(() => {
+        if (!routes.length) dispatch({ type: 'setRoutes', payload: spaceRoutes });
+    }, []);
+
+    const triggerExploration = () => dispatch({ type: 'setExplore', payload: true });
+
     return (
         <PageWrapper className="h-screen flex md:items-end bg-space-home-mobile md:bg-space-home-tablet lg:bg-space-home-desktop text-white">
             <div className="flex flex-col lg:flex-row items-center md:justify-between w-full lg:px-[7.8125rem] lg:pb-28">
@@ -16,7 +41,9 @@ const SpaceLanding = () => {
                     </p>
                 </div>
                 <div className="flex justify-center items-end pb-6 md:pb-[4.125rem] mt-20 md:mt-[9.5rem]">
-                    <LandingPageButton />
+                    <LandingPageButton
+                        onClick={triggerExploration}
+                    />
                 </div>
             </div>
         </PageWrapper>

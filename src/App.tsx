@@ -10,8 +10,7 @@ import crews from '@/views/space/Crews';
 import technologies from '@/views/space/Technologies';
 import '@/styles/tailwind.css';
 
-
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route
