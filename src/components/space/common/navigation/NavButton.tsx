@@ -18,7 +18,7 @@ type NavButtonMetaProps = {
 };
 
 const NavButton = ({ to, number, title, column = false, small = false, showNumber = true, circle = false, numbered = false, initialRectFlag }: NavButtonProps & NavButtonMetaProps) => {
-    const { dispatch, state: { navElement } } = useContext(NavTransitionContext);
+    const { dispatch, state: { navElement, initialNavElement } } = useContext(NavTransitionContext);
 
     const [active, setActive] = useState(false);
     const [screenWidth, setScreenWidth] = useState(0);
@@ -28,7 +28,15 @@ const NavButton = ({ to, number, title, column = false, small = false, showNumbe
     const numeration = `0${number}`;
 
     const setRect = (isActive: boolean) => {
-        if (isActive && navElement.isEqualNode(initialElement)) dispatch({ type: 'setInitialElement', payload: ref.current || initialElement });
+        const setCurrentElementAsNav = () => dispatch({ type: 'setElement', payload: ref.current || initialElement });
+
+        if (isActive) {
+            if (navElement.isEqualNode(initialElement)) {
+                if (initialNavElement.isEqualNode(initialElement)) dispatch({ type: 'setInitialElement', payload: ref.current || initialElement });
+                else setCurrentElementAsNav();
+            }
+            else if (!navElement.isEqualNode(ref.current)) setCurrentElementAsNav();
+        }
     };
 
     const setCurrentRect = (e: MouseEvent) => dispatch({ type: 'setElement', payload: e.currentTarget });

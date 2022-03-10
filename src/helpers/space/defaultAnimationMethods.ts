@@ -31,6 +31,7 @@ export const defaultdHorizontalAnimation: AnimationMethod = (ref, navElement, on
         const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
 
         const startAnimationWidth = startAnimationWidthDifference + oldDimenstion;
+        const right = ref.style.right;
 
         const keyframes = {
             "0%": { left: '', right: AADimension - oldDimenstion },
@@ -40,7 +41,7 @@ export const defaultdHorizontalAnimation: AnimationMethod = (ref, navElement, on
             easeEach: 'none',
             ease: 'power2.inOut'
         };
-        timeline.to(ref, { duration: durationMS / 1000, keyframes, animationFillMode: 'forward' });
+        timeline.to(ref, { duration: durationMS / 1000, keyframes, animationFillMode: 'forward', onComplete: () => { ref.style.right = right; } });
     };
     
     leftRightSliderAnimation(left, right);

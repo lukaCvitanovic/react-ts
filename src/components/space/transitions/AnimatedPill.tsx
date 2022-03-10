@@ -17,6 +17,7 @@ export const horizontalAnimation: AnimationMethod = (ref, navElement, onAnimatio
         timeline.to(ref, { duration: (durationMS / 1000), keyframes, animationFillMode: 'forward' });
     };
     const right = () => {
+        const right = ref.style.right;
         const keyframes = {
             "0%": { left: 0, width: oldDimenstion },
             "50%": { width: AADimension, right: 0, left: '' },
@@ -24,7 +25,7 @@ export const horizontalAnimation: AnimationMethod = (ref, navElement, onAnimatio
             easeEach: 'none',
             ease: 'power2.inOut'
         };
-        timeline.to(ref, { duration: (durationMS / 1000), keyframes, animationFillMode: 'forward' });
+        timeline.to(ref, { duration: (durationMS / 1000), keyframes, onComplete: () => { ref.style.right = right } });
     };
 
     leftRightSliderAnimation(left, right);  
