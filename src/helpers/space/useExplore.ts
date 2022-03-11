@@ -10,6 +10,15 @@ const useExplore: UseExplore = (start, prefix, routes, onComplete) => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const reset = () => {
+        setTrigger(false);
+        setIndex(0);
+    };
+    const onDone = () => {
+        reset();
+        onComplete();
+    };
+
     const exploreIterator = (routes: string[], prefix: string, timeout: number) => {
         return {
             next: () => {
@@ -24,7 +33,7 @@ const useExplore: UseExplore = (start, prefix, routes, onComplete) => {
                         done: false,
                     }
                 }
-                onComplete();
+                onDone();
                 return {
                     value: () => {},
                     done: true,
