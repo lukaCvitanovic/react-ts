@@ -1,8 +1,9 @@
 import { gsap } from 'gsap';
 import { AnimationMethod, ResizeHandeler } from '@/helpers/types';
 
-export const defaultdHorizontalAnimation: AnimationMethod = (ref, navElement, onAnimationComplete, durationMS, { oldDimenstion, oldPosition, AADimension }, leftRightSliderAnimation) => {
+export const defaultdHorizontalAnimation: AnimationMethod = (ref, navElement, onAnimationComplete, durationMS, { oldDimenstion, oldPosition, AADimension }, { leftRightSliderAnimation, setAnimation }) => {
     const timeline = gsap.timeline({ onComplete: onAnimationComplete });
+    setAnimation(timeline);
 
     const startAnimationWidthDifference = ( oldDimenstion > navElement.getBoundingClientRect().width ? (oldDimenstion * 1.2) - oldDimenstion : (navElement.getBoundingClientRect().width * 1.2) - oldDimenstion);
     const endAnimationWidthDifference = oldDimenstion + startAnimationWidthDifference - navElement.getBoundingClientRect().width;
@@ -47,49 +48,50 @@ export const defaultdHorizontalAnimation: AnimationMethod = (ref, navElement, on
     leftRightSliderAnimation(left, right);
 };
 
-export const defaultVerticalAnimation: AnimationMethod = (ref, navElement, onAnmationComplete, durationMS, { oldDimenstion, oldPosition, AADimension }, leftRightSliderAnimation) => {
+export const defaultVerticalAnimation: AnimationMethod = (ref, navElement, onAnmationComplete, durationMS, { oldDimenstion, oldPosition, AADimension }, { leftRightSliderAnimation, setAnimation }) => {
     const timeline = gsap.timeline({ onComplete: onAnmationComplete });
+    setAnimation(timeline);
 
-        const startAnimationWidthDifference = ( oldDimenstion > navElement.getBoundingClientRect().height ? (oldDimenstion * 1.2) - oldDimenstion : (navElement.getBoundingClientRect().height * 1.2) - oldDimenstion);
-        const endAnimationWidthDifference = oldDimenstion + startAnimationWidthDifference - navElement.getBoundingClientRect().height;
+    const startAnimationWidthDifference = ( oldDimenstion > navElement.getBoundingClientRect().height ? (oldDimenstion * 1.2) - oldDimenstion : (navElement.getBoundingClientRect().height * 1.2) - oldDimenstion);
+    const endAnimationWidthDifference = oldDimenstion + startAnimationWidthDifference - navElement.getBoundingClientRect().height;
 
-        const up = () => {
-            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (oldPosition - navElement.getBoundingClientRect().y);
-            const stratingWidthAnimationPercentageString = `${stratingWidthAnimationPercentage*100}%`;
-            const endWidthAnimationPercentage = endAnimationWidthDifference / (oldPosition - navElement.getBoundingClientRect().y);
-            const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
+    const up = () => {
+        const stratingWidthAnimationPercentage = startAnimationWidthDifference / (oldPosition - navElement.getBoundingClientRect().y);
+        const stratingWidthAnimationPercentageString = `${stratingWidthAnimationPercentage*100}%`;
+        const endWidthAnimationPercentage = endAnimationWidthDifference / (oldPosition - navElement.getBoundingClientRect().y);
+        const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
 
-            const startAnimationHeight = startAnimationWidthDifference + oldDimenstion;
+        const startAnimationHeight = startAnimationWidthDifference + oldDimenstion;
 
-            const keyframes = {
-                "0%": { top: AADimension - oldDimenstion },
-                [stratingWidthAnimationPercentageString]: { height: startAnimationWidthDifference + oldDimenstion, top: AADimension - startAnimationHeight }, 
-                [endWidthAnimationPercentageStrign]: { top: 0 },
-                "100%": { height: navElement.getBoundingClientRect().height },
-                easeEach: 'none',
-                ease: 'power2.inOut'
-            }
-            timeline.to(ref, { duration: (durationMS / 1000), keyframes, animationFillMode: 'forward' });
+        const keyframes = {
+            "0%": { top: AADimension - oldDimenstion },
+            [stratingWidthAnimationPercentageString]: { height: startAnimationWidthDifference + oldDimenstion, top: AADimension - startAnimationHeight }, 
+            [endWidthAnimationPercentageStrign]: { top: 0 },
+            "100%": { height: navElement.getBoundingClientRect().height },
+            easeEach: 'none',
+            ease: 'power2.inOut'
+        }
+        timeline.to(ref, { duration: (durationMS / 1000), keyframes, animationFillMode: 'forward' });
+    };
+    const down = () => {
+        const stratingWidthAnimationPercentage = startAnimationWidthDifference / (navElement.getBoundingClientRect().y - oldPosition);
+        const stratingWidthAnimationPercentageString = `${stratingWidthAnimationPercentage*100}%`;
+        const endWidthAnimationPercentage = endAnimationWidthDifference / (navElement.getBoundingClientRect().y - oldPosition);
+        const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
+
+        const startAnimationHeight = startAnimationWidthDifference + oldDimenstion;
+
+        const keyframes = {
+            "0%": { top: '', bottom: AADimension - oldDimenstion },
+            [stratingWidthAnimationPercentageString]: { height: startAnimationWidthDifference + oldDimenstion, top: '' ,bottom: AADimension - startAnimationHeight },
+            [endWidthAnimationPercentageStrign]: { height: startAnimationWidthDifference + oldDimenstion },
+            "100%": { height: navElement.getBoundingClientRect().height, bottom: 0 },
+            easeEach: 'none',
+            ease: 'power2.inOut'
         };
-        const down = () => {
-            const stratingWidthAnimationPercentage = startAnimationWidthDifference / (navElement.getBoundingClientRect().y - oldPosition);
-            const stratingWidthAnimationPercentageString = `${stratingWidthAnimationPercentage*100}%`;
-            const endWidthAnimationPercentage = endAnimationWidthDifference / (navElement.getBoundingClientRect().y - oldPosition);
-            const endWidthAnimationPercentageStrign = `${100 - endWidthAnimationPercentage*100}%`;
-
-            const startAnimationHeight = startAnimationWidthDifference + oldDimenstion;
-
-            const keyframes = {
-                "0%": { top: '', bottom: AADimension - oldDimenstion },
-                [stratingWidthAnimationPercentageString]: { height: startAnimationWidthDifference + oldDimenstion, top: '' ,bottom: AADimension - startAnimationHeight },
-                [endWidthAnimationPercentageStrign]: { height: startAnimationWidthDifference + oldDimenstion },
-                "100%": { height: navElement.getBoundingClientRect().height, bottom: 0 },
-                easeEach: 'none',
-                ease: 'power2.inOut'
-            };
-            timeline.to(ref, { duration: durationMS / 1000, keyframes, animationFillMode: 'forward' });
-        };
-        leftRightSliderAnimation(up, down);
+        timeline.to(ref, { duration: durationMS / 1000, keyframes, animationFillMode: 'forward' });
+    };
+    leftRightSliderAnimation(up, down);
 };
 
 export const defaultResizeHandeler: ResizeHandeler = (column, { setAADimension, setAAPosition, setDefaultCounterDimension }, referenceElement) => {

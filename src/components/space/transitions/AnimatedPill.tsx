@@ -3,8 +3,9 @@ import { AnimatedElementProps, AnimationMethod, ResizeHandeler } from "@/helpers
 import { gsap } from 'gsap';
 
 // Animation methods
-export const horizontalAnimation: AnimationMethod = (ref, navElement, onAnimationComplete, durationMS, { oldDimenstion, AADimension }, leftRightSliderAnimation) => {
+export const horizontalAnimation: AnimationMethod = (ref, navElement, onAnimationComplete, durationMS, { oldDimenstion, AADimension }, { leftRightSliderAnimation, setAnimation }) => {
     const timeline = gsap.timeline({ onComplete: onAnimationComplete });
+    setAnimation(timeline);
 
     const left = () => {
         const keyframes = {
@@ -30,9 +31,9 @@ export const horizontalAnimation: AnimationMethod = (ref, navElement, onAnimatio
 
     leftRightSliderAnimation(left, right);  
 };
-export const verticalAnimation: AnimationMethod = (ref, navElement, onAnimationComplete, durationMS, { oldDimenstion, AADimension }, leftRightSliderAnimation) => {
+export const verticalAnimation: AnimationMethod = (ref, navElement, onAnimationComplete, durationMS, { oldDimenstion, AADimension }, { leftRightSliderAnimation, setAnimation }) => {
     const timeline = gsap.timeline({ onComplete: onAnimationComplete });
-
+    setAnimation(timeline);
     
     const up = () => {
         const keyframes = {

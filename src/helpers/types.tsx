@@ -43,9 +43,18 @@ export type PositionDimension = {
     AADimension: number,
 };
 
+export type AnimationPreviousCallback = (prevous?: boolean) => void;
+
+export type AnimationStartEndAA = (referenceElement: Element) => void;
+
 export type LeftRightSliderAnimation = (onLeft: () => void, onRight: () => void) => void;
 
-export type AnimationMethod = (ref: HTMLElement, navElement: HTMLElement, onAnimationComplete: Callback, durationMS: number, positionsAndDimensions: PositionDimension, leftRightSliderAnimation: LeftRightSliderAnimation) => void;
+export type AnimationMethodCallbacks = {
+    leftRightSliderAnimation: LeftRightSliderAnimation,
+    setAnimation: (value: SetStateAction<gsap.core.Timeline>) => void,
+};
+
+export type AnimationMethod = (ref: HTMLElement, navElement: HTMLElement, onAnimationComplete: Callback, durationMS: number, positionsAndDimensions: PositionDimension, callbacks: AnimationMethodCallbacks) => void;
 
 export type ResizeHandelerSetters = {
     setAADimension: (value: SetStateAction<number>) => void,

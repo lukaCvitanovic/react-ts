@@ -1,7 +1,7 @@
 import AnimatedBorder from "@/components/space/transitions/AnimatedBorder";
-import { Ref, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Ref, useContext, useEffect, useRef, useState } from "react";
 import { NavTransitionContext, initialElement } from "@/components/space/transitions/NavTransitionProvider";
-import { AnimatedAreaProps, AnimatedElementPosisition, AnimatedElementProps, LeftRightSliderAnimation, AnimationMethod, AnimatedAreaPosition, ResizeHandeler } from "@/helpers/types";
+import { AnimatedAreaProps, AnimatedElementPosisition, AnimatedElementProps, LeftRightSliderAnimation, AnimationMethod, AnimatedAreaPosition, ResizeHandeler, AnimationPreviousCallback, AnimationStartEndAA } from "@/helpers/types";
 import { defaultdHorizontalAnimation, defaultResizeHandeler, defaultVerticalAnimation } from "@/helpers/space/defaultAnimationMethods";
 
 import omit from "lodash/omit";
@@ -24,9 +24,11 @@ type AnimatedAreaRenderProp = {
 const defaultRenderProp = (props: AnimatedElementProps, ref: Ref<HTMLHRElement>) => <AnimatedBorder {...props} ref={ref} />;
 
 const AnimatedSlider = ({ column = false, verticalAnimation = defaultVerticalAnimation, horizontalAnimation = defaultdHorizontalAnimation, resizeHandeler = defaultResizeHandeler, render = defaultRenderProp }: AnimatedAreaProps & AnimatedAreaRenderProp) => {
-    const { state: { navElement, initialNavElement }, dispatch } = useContext(NavTransitionContext);
+    const { state: { navElement, initialNavElement, previouseElement }, dispatch } = useContext(NavTransitionContext);
 
     const [animationFlag, setAnimationFlag] = useState(false);
+    const [interuptionFlag, setInteruptionFlag] = useState(false);
+    const [currentAnimation, setCurrentAnimation] = useState<gsap.core.Timeline>({} as gsap.core.Timeline);
         
     const initialAEPosition = (column ? { top: 0, right: 0, left: '', bottom: '' } : { bottom: 0, top: '', left: '', right: '' });
     const initialAAPosition: AnimatedAreaPosition = (column ? { top: 0, right: 0, column } : { bottom: 0, left: 0, right: 0, column });
@@ -88,21 +90,23 @@ const AnimatedSlider = ({ column = false, verticalAnimation = defaultVerticalAni
         if (column) verticalTransitionAnimationArea();
         else horizontalTransitionAnimationArea();
         setAnimationFlag(true);
+        setInteruptionFlag(false);
     };
 
-    const horizontalStartEndAnimationArea = () => {
-        setAADimension((navElement as HTMLElement).offsetWidth);
-        setAAPosition((currentPosition) => ({ ...currentPosition, left: (navElement as HTMLElement).offsetLeft }));
-        setOldNavElement(navElement);
+    const horizontalStartEndAnimationArea: AnimationStartEndAA = (referenceElement) => {
+        setAADimension((referenceElement as HTMLElement).offsetWidth);
+        setAAPosition((currentPosition) => ({ ...currentPosition, left: (referenceElement as HTMLElement).offsetLeft }));
+        setOldNavElement(referenceElement);
     };
-    const verticalStartEndAnimationArea = () => {
-        setAADimension((navElement as HTMLElement).offsetHeight);
-        setAAPosition((currentPosition) => ({ ...currentPosition, top: (navElement as HTMLElement).offsetTop }));
-        setOldNavElement(navElement);
+    const verticalStartEndAnimationArea: AnimationStartEndAA = (referenceElement) => {
+        setAADimension((referenceElement as HTMLElement).offsetHeight);
+        setAAPosition((currentPosition) => ({ ...currentPosition, top: (referenceElement as HTMLElement).offsetTop }));
+        setOldNavElement(referenceElement);
     };
-    const startEndAnimationArea = () => {
-        if (column) verticalStartEndAnimationArea();
-        else horizontalStartEndAnimationArea();
+    const startEndAnimationArea: AnimationPreviousCallback = (previous = false) => {
+        const refernceElement = (previous && previouseElement !== null ? previouseElement : navElement);
+        if (column) verticalStartEndAnimationArea(refernceElement);
+        else horizontalStartEndAnimationArea(refernceElement);
     };
 
     const AADimensionHorizontalInitialization = () => {
@@ -148,11 +152,12 @@ const AnimatedSlider = ({ column = false, verticalAnimation = defaultVerticalAni
         else onRight();
     };
 
-    const onAnimationEnd = () => {
+    const onAnimationEnd: AnimationPreviousCallback = (previous = false) => {
+        const refernceElement = (previous && previouseElement !== null ? previouseElement : navElement);
         setAnimationFlag(false);
-        startEndAnimationArea();
-        setOldPosition((column ? navElement.getBoundingClientRect().y : navElement.getBoundingClientRect().x));
-        setOldDimenstion((column ? navElement.getBoundingClientRect().height : navElement.getBoundingClientRect().width));
+        startEndAnimationArea(previous);
+        setOldPosition((column ? refernceElement.getBoundingClientRect().y : refernceElement.getBoundingClientRect().x));
+        setOldDimenstion((column ? refernceElement.getBoundingClientRect().height : refernceElement.getBoundingClientRect().width));
     }
 
     const ref = useRef<HTMLHRElement>(null);
@@ -161,11 +166,20 @@ const AnimatedSlider = ({ column = false, verticalAnimation = defaultVerticalAni
         if (ref.current !== null) {
             const dimension = (column ? oldNavElement?.getBoundingClientRect().height : oldNavElement?.getBoundingClientRect().width);
             const position = (column ? oldNavElement?.getBoundingClientRect().y : oldNavElement?.getBoundingClientRect().x);
-            if (column) verticalAnimation(ref.current, (navElement as HTMLElement), onAnimationEnd, durationMS, { oldDimenstion: dimension || oldDimenstion, oldPosition: position || oldPosition, AADimension }, leftRightSliderAnimation);
-            else horizontalAnimation(ref.current, (navElement as HTMLElement), onAnimationEnd, durationMS, { oldDimenstion: dimension || oldDimenstion, oldPosition: position || oldPosition, AADimension }, leftRightSliderAnimation);
+            if (column) verticalAnimation(ref.current, (navElement as HTMLElement), onAnimationEnd, durationMS, { oldDimenstion: dimension || oldDimenstion, oldPosition: position || oldPosition, AADimension }, { leftRightSliderAnimation, setAnimation: setCurrentAnimation });
+            else horizontalAnimation(ref.current, (navElement as HTMLElement), onAnimationEnd, durationMS, { oldDimenstion: dimension || oldDimenstion, oldPosition: position || oldPosition, AADimension }, { leftRightSliderAnimation, setAnimation: setCurrentAnimation });
         }
     };
 
+    const interuptAnimation = () => {
+        if (currentAnimation.isActive()) {
+            setInteruptionFlag(true);
+            currentAnimation.time(durationMS/1000);
+            onAnimationEnd(true);
+        }
+    };
+
+    // Triggers and watchers
     useEffect(() => {
         setInitialDimension((column ? initialNavElement.getBoundingClientRect().height : initialNavElement.getBoundingClientRect().width));
         setOldDimenstion((column ? initialNavElement.getBoundingClientRect().height : initialNavElement.getBoundingClientRect().width));
@@ -188,8 +202,15 @@ const AnimatedSlider = ({ column = false, verticalAnimation = defaultVerticalAni
     }, [windowWidth]);
     // To enable AA morphing
     useEffect(() => {
-        if (oldNavElement !== null) transitionAnimationArea();
+        if (oldNavElement !== null) {
+            if (animationFlag) interuptAnimation();
+            else  transitionAnimationArea();
+        }
     }, [navElement.getBoundingClientRect().x, navElement.getBoundingClientRect().y]);
+    // Cals transitionAnimationArea after the interuption changes oldNavElement
+    useEffect(() => {
+        if (oldNavElement !== null && interuptionFlag) transitionAnimationArea();
+    }, [oldNavElement, interuptionFlag]);
     // To enable the AA to addapt to navElement or initialNavElement during window resizing
     window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
     useEffect(() => {

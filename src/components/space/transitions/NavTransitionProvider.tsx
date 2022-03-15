@@ -3,6 +3,7 @@ import { createContext, Dispatch, useReducer } from "react";
 
 type NavTransitionState = {
     navElement: Element,
+    previouseElement: Element | null,
     initialNavElement: Element,
     transitionFlag: boolean,
 };
@@ -23,6 +24,7 @@ export const initialElement = element;
 
 const initialState = {
     navElement: initialElement,
+    previouseElement: null,
     initialNavElement: initialElement,
     transitionFlag: false,
 };
@@ -36,7 +38,7 @@ const navTransitionReducer = (state: NavTransitionState, action: NavTransitionAc
         case 'resetContext':
             return initialState;
         case 'setElement':
-            return { ...state, navElement: action.payload };
+            return { ...state, navElement: action.payload, previouseElement: state.navElement };
         case 'setInitialElement':
             return { ...state, initialNavElement: action.payload };
         default:
