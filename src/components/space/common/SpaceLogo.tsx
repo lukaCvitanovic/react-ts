@@ -1,19 +1,14 @@
-import logo from '@/assets/images/space/shared/logo.svg';
-import { Link } from 'react-router-dom';
+import Logo from '@/components/space/common/Logo';
+import ExplorationController from '@/components/space/exploration/ExplorationController';
 
 const SpaceLogo = () => {
     return (
-        <Link
-            to="/space/home"
-        >
-            <img
-                src={logo}
-                alt='spaceLogo'
-                className='h-12 w-12 rounded-full'
-            />
-        </Link>
-        // <div className='w-12 h-12 bg-red-500'>
-        // </div>
+        <div className="flex items-center z-20">
+            <Logo className='shrink-0' />
+            <div className='flex w-full overflow-hidden px-4'>
+                <ExplorationController />
+            </div>
+        </div>
     );
 };
 

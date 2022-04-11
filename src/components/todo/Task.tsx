@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MouseEventHandler } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export type TaskType = {
     id: number,
@@ -48,7 +49,7 @@ const Task = ({ text, done, toggleTask, deleteTask }: Props & TaskType) => {
                     className="absolute -right-2 -top-2 opacity-50 hover:opacity-100"
                 >
                     <FontAwesomeIcon
-                        icon={faTimesCircle}
+                        icon={faTimesCircle as IconProp}
                         className="text-orange-500 fa-lg"
                     />
                 </button>

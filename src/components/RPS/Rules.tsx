@@ -4,6 +4,7 @@ import { Transition } from "react-transition-group";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 type RulesProps = {
     onClose: Function,
@@ -29,7 +30,7 @@ const Rules = ({ onClose, omitModalTransition }: RulesProps) => {
                 onClick={closeModalTransition}
             >
                 <FontAwesomeIcon
-                    icon={faTimes}
+                    icon={faTimes as IconProp}
                     className="fa-2x"
                 />
             </ButtonRPS>

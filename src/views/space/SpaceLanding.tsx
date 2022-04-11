@@ -1,31 +1,14 @@
 import PageWrapper from "@/components/space/common/PageWrapper";
-import { ExplorationContext } from "@/components/space/ExplorationProvider";
+import { ExplorationContext } from "@/components/space/exploration/ExplorationProvider";
 import LandingPageButton from "@/components/space/LandingButton";
-import { useContext, useEffect } from "react";
-
-const spaceRoutes = [
-    'destinations/moon',
-    'destinations/mars',
-    'destinations/europa',
-    'destinations/titan',
-    'crews/douglas-hurley',
-    'crews/mark-shuttleworth',
-    'crews/victor-glover',
-    'crews/anousheh-ansari',
-    'technologies/launch-vehicle',
-    'technologies/spaceport',
-    'technologies/space-capsule',
-    'home',
-  ];
+import { useContext } from "react";
 
 const SpaceLanding = () => {
-    const { state: { routes }, dispatch } = useContext(ExplorationContext);
+    const { dispatch } = useContext(ExplorationContext);
 
-    useEffect(() => {
-        if (!routes.length) dispatch({ type: 'setRoutes', payload: spaceRoutes });
-    }, []);
-
-    const triggerExploration = () => dispatch({ type: 'setExplore', payload: true });
+    const triggerExploration = () => {
+        dispatch({ type: 'setTrigger', payload: true });
+    };
 
     return (
         <PageWrapper className="h-screen flex md:items-end bg-space-home-mobile md:bg-space-home-tablet lg:bg-space-home-desktop text-white">

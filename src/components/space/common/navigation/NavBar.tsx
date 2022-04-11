@@ -7,7 +7,7 @@ import AnimatedBorder from "@/components/space/transitions/AnimatedBorder";
 import { AnimatedElementProps } from "@/helpers/types";
 import { NavButtonProps } from "@/components/space/common/navigation/NavButton";
 import { Outlet } from "react-router-dom";
-import { Ref, useEffect, useState } from "react";
+import { Ref, useState } from "react";
 import useColumnNav from "@/helpers/space/useColumnNav";
 
 export const mainNavigationData: NavButtonProps[] = [
@@ -44,7 +44,7 @@ const NavBar = () => {
                 <div className="absolute lg:top-10 flex w-full pl-6 md:pl-10 lg:pl-[3.375rem] justify-between items-center">
                     <SpaceLogo />
                     <div className="absolute w-full h-full hidden lg:flex items-center top-0">
-                        <div className="absolute left-[6.375rem]  z-10 h-px w-1/3 pr-3 bg-white/[.25] mix-blend-normal"></div>
+                        <div className="absolute left-[6.375rem] z-10 h-px w-1/3 pr-3 bg-white/[.25] mix-blend-normal"></div>
                     </div>
                     <nav className="hidden md:flex px-12 lg:pl-[7.5rem] md:w-fit lg:w-full shrink lg:max-w-[60%] gap-x-12 text-white backdrop-blur-[5.125rem] bg-white/[.04]">
                         <Navigations navigationData={mainNavigationData} />
